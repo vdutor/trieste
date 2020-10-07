@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from abc import ABC
-from typing import Tuple
+from typing import Callable, Tuple
 
 import numpy.testing as npt
 import tensorflow as tf
@@ -39,11 +39,24 @@ class StaticWithUnitVariance(StaticModelInterface, ABC):
         return tfp.distributions.Normal(mean, var).sample(num_samples)
 
 
+class CustomMeanWithUnitVariance(StaticWithUnitVariance):
+    def __init__(self, f: Callable[[tf.Tensor], tf.Tensor]):
+        self._f = f
+
+    def predict(self, query_points: QueryPoints) -> Tuple[ObserverEvaluations, TensorType]:
+        mean = self._f(query_points)
+        return mean, tf.ones_like(mean)
+
+
 class QuadraticWithUnitVariance(StaticWithUnitVariance):
     r""" An untrainable model hardcoded to the function :math:`y = \sum x^2` with unit variance. """
+    def __init__(self):
+        self._model = CustomMeanWithUnitVariance(
+            lambda x: tf.reduce_sum(x ** 2, axis=1, keepdims=True)
+        )
+
     def predict(self, query_points: QueryPoints) -> Tuple[ObserverEvaluations, TensorType]:
-        mean = tf.reduce_sum(query_points ** 2, axis=1, keepdims=True)
-        return mean, tf.ones_like(mean)
+        return self._model.predict(query_points)
 
 
 def test_quadratic_with_unit_variance() -> None:
