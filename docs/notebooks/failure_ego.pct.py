@@ -167,7 +167,7 @@ class ProbabilityOfValidity(trieste.acquisition.SingleModelAcquisitionBuilder):
 
 ei = trieste.acquisition.ExpectedImprovement()
 acq_fn = trieste.acquisition.Product(ei.using(OBJECTIVE), ProbabilityOfValidity().using(FAILURE))
-rule = trieste.acquisition.rule.EfficientGlobalOptimization(acq_fn)
+rule = trieste.acquisition.rule.Basic(acq_fn)
 
 # %% [markdown]
 # ## Run the optimizer
@@ -178,7 +178,7 @@ rule = trieste.acquisition.rule.EfficientGlobalOptimization(acq_fn)
 # %%
 bo = trieste.bayesian_optimizer.BayesianOptimizer(observer, search_space)
 
-result = bo.optimize(20, initial_data, models, acquisition_rule=rule)
+result, _ = bo.optimize(20, initial_data, models, acquisition_rule=rule)
 
 if result.error is not None: raise result.error
 

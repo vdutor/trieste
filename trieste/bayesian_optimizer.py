@@ -19,13 +19,17 @@ from __future__ import annotations
 import copy
 import traceback
 from dataclasses import dataclass
-from typing import List, Mapping, Optional, Generic, TypeVar, cast
+from typing import Callable, List, Mapping, Optional, Generic, Tuple, TypeVar, cast
 
 from absl import logging
 import gpflow
 import tensorflow as tf
 
-from .acquisition.rule import AcquisitionRule, EfficientGlobalOptimization, OBJECTIVE
+from .acquisition.rule import (
+    AcquisitionRule,
+    EfficientGlobalOptimization,
+    SingleModelAcquisitionRule,
+)
 from .datasets import Dataset
 from .models import ModelInterface, create_model_interface, ModelSpec
 from .observer import Observer
@@ -49,22 +53,19 @@ class LoggingState(Generic[S]):
     acquisition_state: Optional[S]
 
 
-@dataclass(frozen=True)
-class OptimizationResult(Generic[S]):
-    """ Container for the result of the optimization process in :class:`BayesianOptimizer`. """
-
-    datasets: Mapping[str, Dataset]
-    models: Mapping[str, ModelInterface]
-    history: List[LoggingState[S]]
-    error: Optional[Exception]
-
-
 class BayesianOptimizer(Generic[SP]):
     """
     This class performs Bayesian optimization, the data efficient optimization of an expensive
     black-box *objective function* over some *search space*. Since we may not have access to the
     objective function itself, we speak instead of an *observer* that observes it.
     """
+    @dataclass(frozen=True)
+    class Result(Generic[S]):
+        """ Container for the result of the optimization process in :class:`BayesianOptimizer`. """
+
+        datasets: Mapping[str, Dataset]
+        models: Mapping[str, ModelInterface]
+        error: Optional[Exception]
 
     def __init__(self, observer: Observer, search_space: SP):
         """
@@ -83,10 +84,10 @@ class BayesianOptimizer(Generic[SP]):
         # asked at the time
         datasets: Mapping[str, Dataset],
         model_specs: Mapping[str, ModelSpec],
-        acquisition_rule: Optional[AcquisitionRule[S, SP]] = None,
+        acquisition_rule: AcquisitionRule[S, SP],
         acquisition_state: Optional[S] = None,
         track_state: bool = True,
-    ) -> OptimizationResult[S]:
+    ) -> Tuple[Result[S], List[LoggingState[S]]]:
         """
         Attempt to find the minimizer of the ``observer`` in the ``search_space`` (both specified at
         :meth:`__init__`). This is the central implementation of the Bayesian optimization loop.
@@ -145,15 +146,6 @@ class BayesianOptimizer(Generic[SP]):
         if not datasets:
             raise ValueError("dicts of datasets and model_specs must be populated.")
 
-        if acquisition_rule is None:
-            if datasets.keys() != {OBJECTIVE}:
-                raise ValueError(
-                    f"Default acquisition rule EfficientGlobalOptimization requires tag"
-                    f" {OBJECTIVE!r}, got keys {datasets.keys()}"
-                )
-
-            acquisition_rule = cast(AcquisitionRule[S, SP], EfficientGlobalOptimization())
-
         models = {tag: create_model_interface(spec) for tag, spec in model_specs.items()}
         history: List[LoggingState[S]] = []
 
@@ -175,16 +167,64 @@ class BayesianOptimizer(Generic[SP]):
                     model.optimize()
 
             except Exception as error:
-                tf.print(
-                    f"Optimization failed at step {step}, encountered error with traceback:"
-                    f"\n{traceback.format_exc()}"
-                    f"\nAborting process and returning results",
-                    output_stream=logging.ERROR,
+                _log_failure(step)
+                return self.Result(datasets, models, error), history
+
+        return self.Result(datasets, models, None), history
+
+
+class SingleModelOptimizer(Generic[S, SP]):
+    @dataclass(frozen=True)
+    class Result:
+        dataset: Dataset
+        model: ModelInterface
+        error: Optional[Exception]
+
+    def __init__(self, observer: Callable[[tf.Tensor], tf.Tensor], search_space: SP):
+        self._observer = observer
+        self._search_space = search_space
+
+    def optimize(
+        self,
+        num_steps: int,
+        dataset: Dataset,
+        model_spec: ModelSpec,
+        acquisition_rule: Optional[SingleModelAcquisitionRule[S, SP]] = None,
+        acquisition_state: Optional[S] = None,
+        track_state: bool = True,
+    ) -> Tuple[Result, List[...]]:
+        if acquisition_rule is None:
+            acquisition_rule = EfficientGlobalOptimization()
+
+        model = create_model_interface(model_spec)
+        history: List[LoggingState[S]] = []
+
+        for step in range(num_steps):
+            try:
+                # todo history
+
+                query_points, acquisition_state = acquisition_rule.acquire(
+                    self._search_space, dataset, model, acquisition_state
                 )
 
-                return OptimizationResult(datasets, models, history, error)
+                dataset += Dataset(query_points, self._observer(query_points))
+                model.update(dataset)
+                model.optimize()
 
-        return OptimizationResult(datasets, models, history, None)
+            except Exception as error:
+                _log_failure(step)
+                return self.Result(dataset, model, error), history
+
+        return self.Result(dataset, model, None), history
+
+
+def _log_failure(step: int) -> None:
+    tf.print(
+        f"Optimization failed at step {step}, encountered error with traceback:"
+        f"\n{traceback.format_exc()}"
+        f"\nAborting process and returning results",
+        output_stream=logging.ERROR,
+    )
 
 
 def _save_to_history(
