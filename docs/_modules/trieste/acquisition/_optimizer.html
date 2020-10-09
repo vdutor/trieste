@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trieste.acquisition._optimizer &#8212; trieste 0.2.0 documentation</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../../../index.html">
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../../autoapi/trieste/index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../../tutorials.html">Tutorials</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/secondmind-labs/trieste" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for trieste.acquisition._optimizer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 The Trieste Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">singledispatch</span>
+
+<span class="kn">import</span> <span class="nn">gpflow</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+
+<span class="kn">from</span> <span class="nn">..type</span> <span class="kn">import</span> <span class="n">QueryPoints</span>
+<span class="kn">from</span> <span class="nn">..space</span> <span class="kn">import</span> <span class="n">SearchSpace</span><span class="p">,</span> <span class="n">DiscreteSearchSpace</span><span class="p">,</span> <span class="n">Box</span>
+
+<span class="n">TensorMapping</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span>
+
+
+<span class="nd">@singledispatch</span>
+<div class="viewcode-block" id="optimize"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/_optimizer/index.html#trieste.acquisition._optimizer.optimize">[docs]</a><span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span><span class="n">space</span><span class="p">:</span> <span class="n">SearchSpace</span><span class="p">,</span> <span class="n">target_func</span><span class="p">:</span> <span class="n">TensorMapping</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryPoints</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return the point in ``space`` (with shape S) that maximises the function ``target_func``, as the</span>
+<span class="sd">    single entry in a 1 by S tensor.</span>
+
+<span class="sd">    ``target_func`` must satisfy the following:</span>
+
+<span class="sd">      * indices in the leading dimension for both the argument and the result of ``target_func``</span>
+<span class="sd">        must run over points in the space. For example, the element at index 0 is the first point,</span>
+<span class="sd">        and the element at index 1 is the second.</span>
+<span class="sd">      * the result of ``target_func`` must have exactly one additional dimension of size 1. This is</span>
+<span class="sd">        needed to unambiguously define a maximum.</span>
+
+<span class="sd">    :param space: The space of points over which to search.</span>
+<span class="sd">    :param target_func: The function to maximise.</span>
+<span class="sd">    :return: The point in ``space`` that maximises ``target_func``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No optimize implementation found for space of type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">space</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<span class="nd">@optimize</span><span class="o">.</span><span class="n">register</span>
+<span class="k">def</span> <span class="nf">_discrete_space</span><span class="p">(</span><span class="n">space</span><span class="p">:</span> <span class="n">DiscreteSearchSpace</span><span class="p">,</span> <span class="n">target_func</span><span class="p">:</span> <span class="n">TensorMapping</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryPoints</span><span class="p">:</span>
+    <span class="n">target_func_values</span> <span class="o">=</span> <span class="n">target_func</span><span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">points</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">debugging</span><span class="o">.</span><span class="n">assert_shapes</span><span class="p">(</span>
+        <span class="p">[(</span><span class="n">target_func_values</span><span class="p">,</span> <span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">))],</span>
+        <span class="n">message</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;The result of function target_func has an invalid shape.&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">max_value_idx</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">target_func_values</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">space</span><span class="o">.</span><span class="n">points</span><span class="p">[</span><span class="n">max_value_idx</span> <span class="p">:</span> <span class="n">max_value_idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+
+
+<span class="nd">@optimize</span><span class="o">.</span><span class="n">register</span>
+<span class="k">def</span> <span class="nf">_box</span><span class="p">(</span><span class="n">space</span><span class="p">:</span> <span class="n">Box</span><span class="p">,</span> <span class="n">target_func</span><span class="p">:</span> <span class="n">TensorMapping</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryPoints</span><span class="p">:</span>
+    <span class="n">trial_search_space</span> <span class="o">=</span> <span class="n">space</span><span class="o">.</span><span class="n">discretize</span><span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">space</span><span class="o">.</span><span class="n">lower</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">initial_point</span> <span class="o">=</span> <span class="n">optimize</span><span class="p">(</span><span class="n">trial_search_space</span><span class="p">,</span> <span class="n">target_func</span><span class="p">)</span>
+
+    <span class="n">bijector</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">bijectors</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="n">space</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="n">high</span><span class="o">=</span><span class="n">space</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+    <span class="n">variable</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">bijector</span><span class="o">.</span><span class="n">inverse</span><span class="p">(</span><span class="n">initial_point</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_objective</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">target_func</span><span class="p">(</span><span class="n">bijector</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">variable</span><span class="p">))</span>
+
+    <span class="n">gpflow</span><span class="o">.</span><span class="n">optimizers</span><span class="o">.</span><span class="n">Scipy</span><span class="p">()</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">_objective</span><span class="p">,</span> <span class="p">(</span><span class="n">variable</span><span class="p">,))</span>
+
+    <span class="k">return</span> <span class="n">bijector</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">variable</span><span class="p">)</span>
+</pre></div>
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright Copyright 2020 The Trieste Contributors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.&#34;
+.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

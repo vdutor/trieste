@@ -1,0 +1,126 @@
+:mod:`trieste.space`
+====================
+
+.. py:module:: trieste.space
+
+.. autoapi-nested-parse::
+
+   This module contains implementations of various types of search space. 
+
+
+
+Module Contents
+---------------
+
+.. py:class:: SearchSpace
+
+   Bases: :class:`abc.ABC`
+
+   A :class:`SearchSpace` represents the domain over which an objective function is optimized.
+
+   .. method:: sample(self, num_samples: int) -> tf.Tensor
+      :abstractmethod:
+
+      :param num_samples: The number of points to sample from this search space.
+      :return: ``num_samples`` i.i.d. random points, sampled uniformly from this search space.
+
+
+   .. method:: __contains__(self, value: TensorType) -> Union[bool, tf.Tensor]
+      :abstractmethod:
+
+      :param value: A point to check for membership of this :class:`SearchSpace`.
+      :return: `True` if ``value`` is a member of this search space, else `False`. May return a
+          scalar boolean `tf.Tensor` instead of the `bool` itself.
+
+
+
+.. py:class:: DiscreteSearchSpace(points: TensorType)
+
+   Bases: :class:`trieste.space.SearchSpace`
+
+   A discrete :class:`SearchSpace` representing a finite set of :math:`D`-dimensional points in
+   :math:`\mathbb{R}^D`.
+
+   For example:
+
+       >>> points = tf.constant([[-1.0, 0.4], [-1.0, 0.6], [0.0, 0.4]])
+       >>> search_space = DiscreteSearchSpace(points)
+       >>> assert tf.constant([0.0, 0.4]) in search_space
+       >>> assert tf.constant([1.0, 0.5]) not in search_space
+
+
+   :param points: The points that define the discrete space.
+
+   .. method:: points(self) -> TensorType
+      :property:
+
+      All the points in this space. 
+
+
+   .. method:: __contains__(self, value: TensorType) -> Union[bool, tf.Tensor]
+
+      :param value: A point to check for membership of this :class:`SearchSpace`.
+      :return: `True` if ``value`` is a member of this search space, else `False`. May return a
+          scalar boolean `tf.Tensor` instead of the `bool` itself.
+
+
+   .. method:: sample(self, num_samples: int) -> tf.Tensor
+
+      :param num_samples: The number of points to sample from this search space.
+      :return: ``num_samples`` i.i.d. random points, sampled uniformly, and without replacement,
+          from this search space.
+
+
+
+.. py:class:: Box(lower: TensorType, upper: TensorType)
+
+   Bases: :class:`trieste.space.SearchSpace`
+
+   Continuous :class:`SearchSpace` representing a :math:`D`-dimensional box in
+   :math:`\mathbb{R}^D`. Mathematically it is equivalent to the Cartesian product of :math:`D`
+   closed bounded intervals in :math:`\mathbb{R}`.
+
+   :param lower: The lower (inclusive) bounds of the box.
+   :param upper: The upper (inclusive) bounds of the box.
+   :raise ValueError: If ``lower`` and ``upper`` have different shapes. Or if ``upper`` is not
+       greater than ``lower`` across all dimensions.
+   :raise TypeError: If ``lower`` and ``upper`` have different dtypes.
+
+   .. method:: lower(self) -> TensorType
+      :property:
+
+      The lower bounds of the box. 
+
+
+   .. method:: upper(self) -> TensorType
+      :property:
+
+      The upper bounds of the box. 
+
+
+   .. method:: __contains__(self, value: TensorType) -> Union[bool, tf.Tensor]
+
+      Return `True` if ``value`` is a member of this search space, else `False`. A point is a
+      member if all of its coordinates lie in the closed intervals bounded by the lower and upper
+      bounds.
+
+      :param value: A point to check for membership of this :class:`SearchSpace`.
+      :return: `True` if ``value`` is a member of this search space, else `False`. May return a
+          scalar boolean `tf.Tensor` instead of the `bool` itself.
+      :raise ValueError: If ``value`` has a different shape from the search space.
+
+
+   .. method:: sample(self, num_samples: int) -> tf.Tensor
+
+      :param num_samples: The number of points to sample from this search space.
+      :return: ``num_samples`` i.i.d. random points, sampled uniformly from this search space.
+
+
+   .. method:: discretize(self, num_samples: int) -> DiscreteSearchSpace
+
+      :param num_samples: The number of points in the :class:`DiscreteSearchSpace`.
+      :return: A discrete search space consisting of ``num_samples`` points sampled uniformly from
+          this :class:`Box`.
+
+
+

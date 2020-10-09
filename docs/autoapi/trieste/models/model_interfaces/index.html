@@ -1,0 +1,638 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trieste.models.model_interfaces &#8212; trieste 0.2.0 documentation</title>
+    
+  <link rel="stylesheet" href="../../../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../../../../index.html">
+      <img src="../../../../_static/logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../../../tutorials.html">Tutorials</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/secondmind-labs/trieste" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#module-contents" class="nav-link">Module Contents</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.ModelInterface" class="nav-link">ModelInterface</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.ModelInterface.update" class="nav-link">update</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.ModelInterface.predict" class="nav-link">predict</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.ModelInterface.sample" class="nav-link">sample</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.ModelInterface.optimize" class="nav-link">optimize</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface" class="nav-link">TrainableModelInterface</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.loss" class="nav-link">loss</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.optimizer" class="nav-link">optimizer</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.set_optimizer" class="nav-link">set_optimizer</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.optimizer_args" class="nav-link">optimizer_args</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.set_optimizer_args" class="nav-link">set_optimizer_args</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.optimize" class="nav-link">optimize</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.TrainableModelInterface.set_optimize" class="nav-link">set_optimize</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.GPflowPredictor" class="nav-link">GPflowPredictor</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.GPflowPredictor.model" class="nav-link">model</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.GPflowPredictor.predict" class="nav-link">predict</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.GPflowPredictor.sample" class="nav-link">sample</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.GaussianProcessRegression" class="nav-link">GaussianProcessRegression</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.GaussianProcessRegression.model" class="nav-link">model</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.GaussianProcessRegression.loss" class="nav-link">loss</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.GaussianProcessRegression.update" class="nav-link">update</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.Batcher" class="nav-link">Batcher</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.SparseVariational" class="nav-link">SparseVariational</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.SparseVariational.model" class="nav-link">model</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.SparseVariational.update" class="nav-link">update</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.SparseVariational.optimize" class="nav-link">optimize</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.VariationalGaussianProcess" class="nav-link">VariationalGaussianProcess</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.VariationalGaussianProcess.update" class="nav-link">update</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.models.model_interfaces.VariationalGaussianProcess.predict" class="nav-link">predict</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.models.model_interfaces.supported_models" class="nav-link">supported_models</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-trieste.models.model_interfaces">
+<span id="trieste-models-model-interfaces"></span><h1><a class="reference internal" href="#module-trieste.models.model_interfaces" title="trieste.models.model_interfaces"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trieste.models.model_interfaces</span></code></a><a class="headerlink" href="#module-trieste.models.model_interfaces" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="trieste.models.model_interfaces.ModelInterface">
+<em class="property">class </em><code class="sig-name descname">ModelInterface</code><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#ModelInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.ModelInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>A trainable probabilistic model.</p>
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.ModelInterface.update">
+<em class="property">abstract </em><code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#ModelInterface.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.ModelInterface.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the model given the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Does not train the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> – The data with which to update the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.ModelInterface.predict">
+<em class="property">abstract </em><code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">query_points</span><span class="p">:</span> <span class="n">QueryPoints</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>ObserverEvaluations<span class="p">, </span>TensorType<span class="p">]</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#ModelInterface.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.ModelInterface.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the predicted mean and variance of the latent function(s) at the specified
+<code class="docutils literal notranslate"><span class="pre">query_points</span></code>, conditioned on the current data (see <a class="reference internal" href="#trieste.models.model_interfaces.ModelInterface.update" title="trieste.models.model_interfaces.ModelInterface.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update()</span></code></a> to update the model
+given new data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query_points</strong> – The points at which to make predictions.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The predicted mean and variance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.ModelInterface.sample">
+<em class="property">abstract </em><code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">query_points</span><span class="p">:</span> <span class="n">QueryPoints</span></em>, <em class="sig-param"><span class="n">num_samples</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; ObserverEvaluations<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#ModelInterface.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.ModelInterface.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">num_samples</span></code> samples from the predictive distribution at <code class="docutils literal notranslate"><span class="pre">query_points</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_points</strong> – The points at which to sample.</p></li>
+<li><p><strong>num_samples</strong> – The number of samples at each point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The samples. Has shape [S, Q, D], where S is the number of samples, Q is the number
+of query points, and D is the dimension of the predictive distribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.ModelInterface.optimize">
+<em class="property">abstract </em><code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#ModelInterface.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.ModelInterface.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimize the model parameters.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface">
+<em class="property">class </em><code class="sig-name descname">TrainableModelInterface</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tensorflow.Module</span></code>, <a class="reference internal" href="#trieste.models.model_interfaces.ModelInterface" title="trieste.models.model_interfaces.ModelInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.models.model_interfaces.ModelInterface</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>A utility class that provides a default optimization strategy, as well as the ability to modify
+various elements of this strategy.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>maxiter_default</strong> – The default maximum number of iterations to optimize the model for, when
+using a <code class="xref py py-class docutils literal notranslate"><span class="pre">tf.optimizers.Optimizer</span></code>.</p></li>
+<li><p><strong>create_optimizer_default</strong> – Builder for the default optimizer.</p></li>
+<li><p><strong>apply_jit_function</strong> – If <cite>True</cite>, the default optimization procedure is compiled
+with <code class="xref py py-func docutils literal notranslate"><span class="pre">tf.function()</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.loss">
+<em class="property">abstract </em><code class="sig-name descname">loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>The training loss (to be minimized) on this model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.optimizer">
+<em class="property">property </em><code class="sig-name descname">optimizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Optimizer<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><p>The optimizer used to minimize the training loss.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.set_optimizer">
+<code class="sig-name descname">set_optimizer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="p">:</span> <span class="n">Optimizer</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.set_optimizer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.set_optimizer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>optimizer</strong> – The optimizer to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.optimizer_args">
+<em class="property">property </em><code class="sig-name descname">optimizer_args</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span>Any<span class="p">]</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.optimizer_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.optimizer_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Keyword arguments passed to the optimizer during optimization.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.set_optimizer_args">
+<code class="sig-name descname">set_optimizer_args</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">args</span><span class="p">:</span> <span class="n">Dict<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span>Any<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.set_optimizer_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.set_optimizer_args" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>args</strong> – The keyword arguments to use.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.optimize">
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimize the model parameters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.TrainableModelInterface.set_optimize">
+<code class="sig-name descname">set_optimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">optimize_fn</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Callable<span class="p">[</span><span class="p">]</span><span class="p">, </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><span class="p">]</span><span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#TrainableModelInterface.set_optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.TrainableModelInterface.set_optimize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>optimize_fn</strong> – The function to call on <cite>optimize</cite>. By default, constructs an</p>
+</dd>
+</dl>
+<p>optimization procedure from the current <cite>loss</cite>, <cite>optimizer</cite> and <cite>optimizer_args</cite>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.models.model_interfaces.GPflowPredictor">
+<em class="property">class </em><code class="sig-name descname">GPflowPredictor</code><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GPflowPredictor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GPflowPredictor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#trieste.models.model_interfaces.ModelInterface" title="trieste.models.model_interfaces.ModelInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.models.model_interfaces.ModelInterface</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>A trainable wrapper for a GPflow Gaussian process model.</p>
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.GPflowPredictor.model">
+<em class="property">property </em><code class="sig-name descname">model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; GPModel<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GPflowPredictor.model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GPflowPredictor.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The underlying GPflow model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.GPflowPredictor.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">query_points</span><span class="p">:</span> <span class="n">QueryPoints</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>ObserverEvaluations<span class="p">, </span>TensorType<span class="p">]</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GPflowPredictor.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GPflowPredictor.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the predicted mean and variance of the latent function(s) at the specified
+<code class="docutils literal notranslate"><span class="pre">query_points</span></code>, conditioned on the current data (see <code class="xref py py-meth docutils literal notranslate"><span class="pre">update()</span></code> to update the model
+given new data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query_points</strong> – The points at which to make predictions.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The predicted mean and variance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.GPflowPredictor.sample">
+<code class="sig-name descname">sample</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">query_points</span><span class="p">:</span> <span class="n">QueryPoints</span></em>, <em class="sig-param"><span class="n">num_samples</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em><span class="sig-paren">)</span> &#x2192; ObserverEvaluations<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GPflowPredictor.sample"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GPflowPredictor.sample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return <code class="docutils literal notranslate"><span class="pre">num_samples</span></code> samples from the predictive distribution at <code class="docutils literal notranslate"><span class="pre">query_points</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_points</strong> – The points at which to sample.</p></li>
+<li><p><strong>num_samples</strong> – The number of samples at each point.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The samples. Has shape [S, Q, D], where S is the number of samples, Q is the number
+of query points, and D is the dimension of the predictive distribution.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.models.model_interfaces.GaussianProcessRegression">
+<em class="property">class </em><code class="sig-name descname">GaussianProcessRegression</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>GPR<span class="p">, </span>SGPR<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GaussianProcessRegression"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GaussianProcessRegression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#trieste.models.model_interfaces.GPflowPredictor" title="trieste.models.model_interfaces.GPflowPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.models.model_interfaces.GPflowPredictor</span></code></a>, <a class="reference internal" href="#trieste.models.model_interfaces.TrainableModelInterface" title="trieste.models.model_interfaces.TrainableModelInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.models.model_interfaces.TrainableModelInterface</span></code></a></p>
+<p>A trainable wrapper for a GPflow Gaussian process model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> – The GPflow model to wrap.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.GaussianProcessRegression.model">
+<em class="property">property </em><code class="sig-name descname">model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span>GPR<span class="p">, </span>SGPR<span class="p">]</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GaussianProcessRegression.model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GaussianProcessRegression.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The underlying GPflow model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.GaussianProcessRegression.loss">
+<code class="sig-name descname">loss</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GaussianProcessRegression.loss"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GaussianProcessRegression.loss" title="Permalink to this definition">¶</a></dt>
+<dd><p>The training loss (to be minimized) on this model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.GaussianProcessRegression.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#GaussianProcessRegression.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.GaussianProcessRegression.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the model given the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Does not train the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> – The data with which to update the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt id="trieste.models.model_interfaces.Batcher">
+<code class="sig-name descname">Batcher</code><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#Batcher"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.Batcher" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type alias for a function that creates minibatches from a <a class="reference internal" href="../../datasets/index.html#trieste.datasets.Dataset" title="trieste.datasets.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.models.model_interfaces.SparseVariational">
+<em class="property">class </em><code class="sig-name descname">SparseVariational</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">SVGP</span></em>, <em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Dataset</span></em>, <em class="sig-param"><span class="n">optimizer</span><span class="p">:</span> <span class="n">tf.optimizers.Optimizer</span></em>, <em class="sig-param"><span class="n">iterations</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)">int</a></span></em>, <em class="sig-param"><span class="n">batcher</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#trieste.models.model_interfaces.Batcher" title="trieste.models.model_interfaces.Batcher">Batcher</a></span> <span class="o">=</span> <span class="default_value">lambda ds: ...</span></em>, <em class="sig-param"><span class="n">apply_jit</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a></span> <span class="o">=</span> <span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#SparseVariational"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.SparseVariational" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#trieste.models.model_interfaces.GPflowPredictor" title="trieste.models.model_interfaces.GPflowPredictor"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.models.model_interfaces.GPflowPredictor</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>A trainable wrapper for a GPflow Gaussian process model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The underlying GPflow sparse variational model.</p></li>
+<li><p><strong>data</strong> – The initial training data.</p></li>
+<li><p><strong>iterations</strong> – The number of iterations for which to optimize the model.</p></li>
+<li><p><strong>optimizer</strong> – The optimizer to use for optimization.</p></li>
+<li><p><strong>batcher</strong> – A function to convert training data into (mini)batches for optimization.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.SparseVariational.model">
+<em class="property">property </em><code class="sig-name descname">model</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; SVGP<a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#SparseVariational.model"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.SparseVariational.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>The underlying GPflow model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.SparseVariational.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#SparseVariational.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.SparseVariational.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the model given the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Does not train the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> – The data with which to update the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.SparseVariational.optimize">
+<code class="sig-name descname">optimize</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#SparseVariational.optimize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.SparseVariational.optimize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optimize the model in batches defined by the <code class="docutils literal notranslate"><span class="pre">batcher</span></code> argument to <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.models.model_interfaces.VariationalGaussianProcess">
+<em class="property">class </em><code class="sig-name descname">VariationalGaussianProcess</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>GPR<span class="p">, </span>SGPR<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#VariationalGaussianProcess"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.VariationalGaussianProcess" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#trieste.models.model_interfaces.GaussianProcessRegression" title="trieste.models.model_interfaces.GaussianProcessRegression"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.models.model_interfaces.GaussianProcessRegression</span></code></a></p>
+<p>A trainable wrapper for a GPflow Gaussian process model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> – The GPflow model to wrap.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.VariationalGaussianProcess.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#VariationalGaussianProcess.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.VariationalGaussianProcess.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the model given the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. Does not train the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dataset</strong> – The data with which to update the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.models.model_interfaces.VariationalGaussianProcess.predict">
+<code class="sig-name descname">predict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">query_points</span><span class="p">:</span> <span class="n">QueryPoints</span></em><span class="sig-paren">)</span> &#x2192; Tuple<span class="p">[</span>ObserverEvaluations<span class="p">, </span>TensorType<span class="p">]</span><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#VariationalGaussianProcess.predict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.VariationalGaussianProcess.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the predicted mean and variance of the latent function(s) at the specified
+<code class="docutils literal notranslate"><span class="pre">query_points</span></code>, conditioned on the current data (see <a class="reference internal" href="#trieste.models.model_interfaces.VariationalGaussianProcess.update" title="trieste.models.model_interfaces.VariationalGaussianProcess.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update()</span></code></a> to update the model
+given new data).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>query_points</strong> – The points at which to make predictions.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The predicted mean and variance.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt id="trieste.models.model_interfaces.supported_models">
+<code class="sig-name descname">supported_models</code><em class="property"> :Dict[Any, Callable[[Any], TrainableModelInterface]]</em><a class="reference internal" href="../../../../_modules/trieste/models/model_interfaces.html#supported_models"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.models.model_interfaces.supported_models" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Variables</dt>
+<dd class="field-odd"><p><a class="reference internal" href="../index.html#trieste.models.supported_models" title="trieste.models.supported_models"><strong>supported_models</strong></a> – A mapping of third-party model types to <a class="reference internal" href="#trieste.models.model_interfaces.ModelInterface" title="trieste.models.model_interfaces.ModelInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelInterface</span></code></a> classes</p>
+</dd>
+</dl>
+<p>that wrap models of those types.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright Copyright 2020 The Trieste Contributors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.&#34;
+.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

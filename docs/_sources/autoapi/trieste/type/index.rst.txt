@@ -1,0 +1,38 @@
+:mod:`trieste.type`
+===================
+
+.. py:module:: trieste.type
+
+.. autoapi-nested-parse::
+
+   This module contains type aliases.
+
+
+
+Module Contents
+---------------
+
+.. data:: TensorType
+   
+
+   Type alias for tensor-like types.
+
+
+.. data:: QueryPoints
+   
+
+   Type alias for points at which to query the observer.
+
+
+.. data:: ObserverEvaluations
+   
+
+   Type alias for observed evaluations of the observer.
+
+
+.. data:: AcquisitionEvaluations
+   
+
+   Type alias for evaluations of acquisition functions.
+
+

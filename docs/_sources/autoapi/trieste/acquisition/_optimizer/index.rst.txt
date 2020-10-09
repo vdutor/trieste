@@ -1,0 +1,29 @@
+:orphan:
+
+:mod:`trieste.acquisition._optimizer`
+=====================================
+
+.. py:module:: trieste.acquisition._optimizer
+
+
+Module Contents
+---------------
+
+.. function:: optimize(space: SearchSpace, target_func: TensorMapping) -> QueryPoints
+
+   Return the point in ``space`` (with shape S) that maximises the function ``target_func``, as the
+   single entry in a 1 by S tensor.
+
+   ``target_func`` must satisfy the following:
+
+     * indices in the leading dimension for both the argument and the result of ``target_func``
+       must run over points in the space. For example, the element at index 0 is the first point,
+       and the element at index 1 is the second.
+     * the result of ``target_func`` must have exactly one additional dimension of size 1. This is
+       needed to unambiguously define a maximum.
+
+   :param space: The space of points over which to search.
+   :param target_func: The function to maximise.
+   :return: The point in ``space`` that maximises ``target_func``.
+
+

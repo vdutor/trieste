@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trieste.bayesian_optimizer &#8212; trieste 0.2.0 documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../../index.html">
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../autoapi/trieste/index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../tutorials.html">Tutorials</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/secondmind-labs/trieste" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for trieste.bayesian_optimizer</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 The Trieste Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module contains the :class:`BayesianOptimizer` class, used to perform Bayesian optimization.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Generic</span><span class="p">,</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">cast</span>
+
+<span class="kn">from</span> <span class="nn">absl</span> <span class="kn">import</span> <span class="n">logging</span>
+<span class="kn">import</span> <span class="nn">gpflow</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">from</span> <span class="nn">.acquisition.rule</span> <span class="kn">import</span> <span class="n">AcquisitionRule</span><span class="p">,</span> <span class="n">EfficientGlobalOptimization</span><span class="p">,</span> <span class="n">OBJECTIVE</span>
+<span class="kn">from</span> <span class="nn">.datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">create_model_interface</span><span class="p">,</span> <span class="n">ModelSpec</span>
+<span class="kn">from</span> <span class="nn">.observer</span> <span class="kn">import</span> <span class="n">Observer</span>
+<span class="kn">from</span> <span class="nn">.space</span> <span class="kn">import</span> <span class="n">SearchSpace</span>
+
+<div class="viewcode-block" id="S"><a class="viewcode-back" href="../../autoapi/trieste/bayesian_optimizer/index.html#trieste.bayesian_optimizer.S">[docs]</a><span class="n">S</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">)</span></div>
+<span class="sd">&quot;&quot;&quot; Unbound type variable. &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SP"><a class="viewcode-back" href="../../autoapi/trieste/bayesian_optimizer/index.html#trieste.bayesian_optimizer.SP">[docs]</a><span class="n">SP</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s2">&quot;SP&quot;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="n">SearchSpace</span><span class="p">)</span></div>
+<span class="sd">&quot;&quot;&quot; Type variable bound to :class:`SearchSpace`. &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="LoggingState"><a class="viewcode-back" href="../../autoapi/trieste/bayesian_optimizer/index.html#trieste.bayesian_optimizer.LoggingState">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">LoggingState</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">S</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Container used to track the state of the optimization process in :class:`BayesianOptimizer`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">]</span>
+    <span class="n">models</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelInterface</span><span class="p">]</span>
+    <span class="n">acquisition_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">S</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="OptimizationResult"><a class="viewcode-back" href="../../autoapi/trieste/bayesian_optimizer/index.html#trieste.bayesian_optimizer.OptimizationResult">[docs]</a><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">OptimizationResult</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">S</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot; Container for the result of the optimization process in :class:`BayesianOptimizer`. &quot;&quot;&quot;</span>
+
+    <span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">]</span>
+    <span class="n">models</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelInterface</span><span class="p">]</span>
+    <span class="n">history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LoggingState</span><span class="p">[</span><span class="n">S</span><span class="p">]]</span>
+    <span class="n">error</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="ne">Exception</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="BayesianOptimizer"><a class="viewcode-back" href="../../autoapi/trieste/bayesian_optimizer/index.html#trieste.bayesian_optimizer.BayesianOptimizer">[docs]</a><span class="k">class</span> <span class="nc">BayesianOptimizer</span><span class="p">(</span><span class="n">Generic</span><span class="p">[</span><span class="n">SP</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class performs Bayesian optimization, the data efficient optimization of an expensive</span>
+<span class="sd">    black-box *objective function* over some *search space*. Since we may not have access to the</span>
+<span class="sd">    objective function itself, we speak instead of an *observer* that observes it.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">observer</span><span class="p">:</span> <span class="n">Observer</span><span class="p">,</span> <span class="n">search_space</span><span class="p">:</span> <span class="n">SP</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param observer: The observer of the objective function.</span>
+<span class="sd">        :param search_space: The space over which to search. Must be a</span>
+<span class="sd">            :class:`~trieste.space.SearchSpace`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">observer</span> <span class="o">=</span> <span class="n">observer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span> <span class="o">=</span> <span class="n">search_space</span>
+
+<div class="viewcode-block" id="BayesianOptimizer.optimize"><a class="viewcode-back" href="../../autoapi/trieste/bayesian_optimizer/index.html#trieste.bayesian_optimizer.BayesianOptimizer.optimize">[docs]</a>    <span class="k">def</span> <span class="nf">optimize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">num_steps</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="c1"># note the transforms, datasets and model_specs are kept as separate dicts rather than</span>
+        <span class="c1"># merged into one dict as that was the style strongly preferred by the researcher we</span>
+        <span class="c1"># asked at the time</span>
+        <span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">],</span>
+        <span class="n">model_specs</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelSpec</span><span class="p">],</span>
+        <span class="n">acquisition_rule</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AcquisitionRule</span><span class="p">[</span><span class="n">S</span><span class="p">,</span> <span class="n">SP</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">acquisition_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">S</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">track_state</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OptimizationResult</span><span class="p">[</span><span class="n">S</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempt to find the minimizer of the ``observer`` in the ``search_space`` (both specified at</span>
+<span class="sd">        :meth:`__init__`). This is the central implementation of the Bayesian optimization loop.</span>
+
+<span class="sd">        For each step in ``num_steps``, this method:</span>
+<span class="sd">            - Finds the next points with which to query the ``observer`` using the</span>
+<span class="sd">              ``acquisition_rule``&#39;s :meth:`acquire` method, passing it the ``search_space``,</span>
+<span class="sd">              ``datasets`` and models built from the ``model_specs``.</span>
+<span class="sd">            - Queries the ``observer`` *once* at those points.</span>
+<span class="sd">            - Updates the datasets and models with the data from the ``observer``.</span>
+
+<span class="sd">        Within the optimization loop, this method will catch any errors raised and return them</span>
+<span class="sd">        instead, along with the latest data, models, and the history of the optimization process.</span>
+<span class="sd">        This enables the caller to restart the optimization loop from the latest successful step.</span>
+<span class="sd">        **Note that if an error occurred, the latest data and models might not be from the</span>
+<span class="sd">        ``num_steps``-th optimization step, but from the step where the error occurred. It is up to</span>
+<span class="sd">        the caller to check if this has happened, by checking if the result&#39;s `error` attribute is</span>
+<span class="sd">        populated.** Any errors encountered within this method, but outside the optimization loop,</span>
+<span class="sd">        will be raised as normal. These are documented below.</span>
+
+<span class="sd">        **Type hints:**</span>
+<span class="sd">            - The ``acquisition_rule`` must use the same type of</span>
+<span class="sd">              :class:`~trieste.space.SearchSpace` as specified in :meth:`__init__`.</span>
+<span class="sd">            - The history, if populated, will contain an acquisition state of the same type as used</span>
+<span class="sd">              by the ``acquisition_rule``.</span>
+
+<span class="sd">        :param num_steps: The number of optimization steps to run.</span>
+<span class="sd">        :param datasets: The known observer query points and observations for each tag.</span>
+<span class="sd">        :param model_specs: The model to use for each :class:`~trieste.datasets.Dataset` (matched</span>
+<span class="sd">            by tag).</span>
+<span class="sd">        :param acquisition_rule: The acquisition rule, which defines how to search for a new point</span>
+<span class="sd">            on each optimization step. Defaults to</span>
+<span class="sd">            :class:`~trieste.acquisition.rule.EfficientGlobalOptimization` with default</span>
+<span class="sd">            arguments. Note that if the default is used, this implies the tags must be</span>
+<span class="sd">            `OBJECTIVE`, the search space can be any :class:`~trieste.space.SearchSpace`, and the</span>
+<span class="sd">            acquisition state returned in the :class:`OptimizationResult` will be `None`.</span>
+<span class="sd">        :param acquisition_state: The acquisition state to use on the first optimization step.</span>
+<span class="sd">            This argument allows the caller to restore the optimization process from a previous</span>
+<span class="sd">            :class:`LoggingState`.</span>
+<span class="sd">        :param track_state: If `True`, this method saves the optimization state at the start of each</span>
+<span class="sd">            step.</span>
+<span class="sd">        :return: The updated models, data, history containing information from every optimization</span>
+<span class="sd">            step (see ``track_state``), and the error if any error was encountered during</span>
+<span class="sd">            optimization.</span>
+<span class="sd">        :raise ValueError: If any of the following are true:</span>
+<span class="sd">            - the keys in ``datasets`` and ``model_specs`` do not match</span>
+<span class="sd">            - ``datasets`` or ``model_specs`` are empty</span>
+<span class="sd">            - the default `acquisition_rule` is used and the tags are not `OBJECTIVE`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">datasets</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">!=</span> <span class="n">model_specs</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;datasets and model_specs should contain the same keys. Got </span><span class="si">{</span><span class="n">datasets</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2"> and&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">model_specs</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2"> respectively.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">datasets</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;dicts of datasets and model_specs must be populated.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">acquisition_rule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">datasets</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="o">!=</span> <span class="p">{</span><span class="n">OBJECTIVE</span><span class="p">}:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Default acquisition rule EfficientGlobalOptimization requires tag&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">OBJECTIVE</span><span class="si">!r}</span><span class="s2">, got keys </span><span class="si">{</span><span class="n">datasets</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">)</span>
+
+            <span class="n">acquisition_rule</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">AcquisitionRule</span><span class="p">[</span><span class="n">S</span><span class="p">,</span> <span class="n">SP</span><span class="p">],</span> <span class="n">EfficientGlobalOptimization</span><span class="p">())</span>
+
+        <span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">create_model_interface</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">spec</span> <span class="ow">in</span> <span class="n">model_specs</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="n">history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LoggingState</span><span class="p">[</span><span class="n">S</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_steps</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">track_state</span><span class="p">:</span>
+                    <span class="n">_save_to_history</span><span class="p">(</span><span class="n">history</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">acquisition_state</span><span class="p">)</span>
+
+                <span class="n">query_points</span><span class="p">,</span> <span class="n">acquisition_state</span> <span class="o">=</span> <span class="n">acquisition_rule</span><span class="o">.</span><span class="n">acquire</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">search_space</span><span class="p">,</span> <span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">acquisition_state</span>
+                <span class="p">)</span>
+
+                <span class="n">observer_output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">observer</span><span class="p">(</span><span class="n">query_points</span><span class="p">)</span>
+
+                <span class="n">datasets</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">datasets</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="o">+</span> <span class="n">observer_output</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">observer_output</span><span class="p">}</span>
+
+                <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">model</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="n">tag</span><span class="p">])</span>
+                    <span class="n">model</span><span class="o">.</span><span class="n">optimize</span><span class="p">()</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Optimization failed at step </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s2">, encountered error with traceback:&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Aborting process and returning results&quot;</span><span class="p">,</span>
+                    <span class="n">output_stream</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
+                <span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">OptimizationResult</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">OptimizationResult</span><span class="p">(</span><span class="n">datasets</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">history</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_save_to_history</span><span class="p">(</span>
+    <span class="n">history</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">LoggingState</span><span class="p">[</span><span class="n">S</span><span class="p">]],</span>
+    <span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">],</span>
+    <span class="n">models</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelInterface</span><span class="p">],</span>
+    <span class="n">acquisition_state</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">S</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">models_copy</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">gpflow</span><span class="o">.</span><span class="n">utilities</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">datasets_copy</span> <span class="o">=</span> <span class="p">{</span><span class="n">tag</span><span class="p">:</span> <span class="n">ds</span> <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">ds</span> <span class="ow">in</span> <span class="n">datasets</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+    <span class="n">logging_state</span> <span class="o">=</span> <span class="n">LoggingState</span><span class="p">(</span><span class="n">datasets_copy</span><span class="p">,</span> <span class="n">models_copy</span><span class="p">,</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">acquisition_state</span><span class="p">))</span>
+    <span class="n">history</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logging_state</span><span class="p">)</span>
+</pre></div>
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright Copyright 2020 The Trieste Contributors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.&#34;
+.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

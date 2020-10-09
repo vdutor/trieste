@@ -1,0 +1,60 @@
+:orphan:
+
+:mod:`trieste.models.config`
+============================
+
+.. py:module:: trieste.models.config
+
+
+Module Contents
+---------------
+
+.. py:class:: ModelConfig
+
+   Specification for building a :class:`~trieste.models.ModelInterface`. 
+
+   .. attribute:: model
+      :annotation: :Union[tf.Module, ModelInterface]
+
+      The :class:`~trieste.models.ModelInterface`, or the model to wrap in one. 
+
+
+   .. attribute:: optimizer
+      :annotation: :Optimizer
+
+      The optimizer with which to train the model (by minimizing its loss function). 
+
+
+   .. attribute:: optimizer_args
+      :annotation: :Dict[str, Any]
+
+      The keyword arguments to pass to the optimizer when training the model. 
+
+
+   .. method:: create_from_dict(d: Dict[str, Any]) -> ModelConfig
+      :staticmethod:
+
+      :param d: A dictionary from which to construct this :class:`ModelConfig`.
+      :return: A :class:`ModelConfig` built from ``d``.
+      :raise TypeError: If the keys in ``d`` do not correspond to the parameters of
+          :class:`ModelConfig`.
+
+
+   .. method:: create_model_interface(self) -> ModelInterface
+
+      :return: A model built from this model configuration.
+
+
+
+.. data:: ModelSpec
+   
+
+   Type alias for any type that can be used to fully specify a model. 
+
+
+.. function:: create_model_interface(config: ModelSpec) -> ModelInterface
+
+   :param config: A :class:`ModelInterface` or configuration of a model.
+   :return: A :class:`~trieste.models.ModelInterface` build according to ``config``.
+
+

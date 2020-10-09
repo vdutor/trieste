@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trieste.acquisition.function &#8212; trieste 0.2.0 documentation</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../../../index.html">
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../../autoapi/trieste/index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../../tutorials.html">Tutorials</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/secondmind-labs/trieste" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for trieste.acquisition.function</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 The Trieste Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">tensorflow_probability</span> <span class="k">as</span> <span class="nn">tfp</span>
+
+<span class="kn">from</span> <span class="nn">..datasets</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">..type</span> <span class="kn">import</span> <span class="n">QueryPoints</span>
+<span class="kn">from</span> <span class="nn">..models</span> <span class="kn">import</span> <span class="n">ModelInterface</span>
+
+<div class="viewcode-block" id="AcquisitionFunction"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.AcquisitionFunction">[docs]</a><span class="n">AcquisitionFunction</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">QueryPoints</span><span class="p">],</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]</span></div>
+<span class="sd">&quot;&quot;&quot; Type alias for acquisition functions. &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="AcquisitionFunctionBuilder"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.AcquisitionFunctionBuilder">[docs]</a><span class="k">class</span> <span class="nc">AcquisitionFunctionBuilder</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; An :class:`AcquisitionFunctionBuilder` builds an acquisition function. &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="AcquisitionFunctionBuilder.prepare_acquisition_function"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.AcquisitionFunctionBuilder.prepare_acquisition_function">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_acquisition_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">],</span> <span class="n">models</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelInterface</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunction</span><span class="p">:</span></div></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param datasets: The data from the observer.</span>
+<span class="sd">        :param models: The models over each dataset in ``datasets``.</span>
+<span class="sd">        :return: An acquisition function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="SingleModelAcquisitionBuilder"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.SingleModelAcquisitionBuilder">[docs]</a><span class="k">class</span> <span class="nc">SingleModelAcquisitionBuilder</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convenience acquisition function builder for an acquisition function (or component of a</span>
+<span class="sd">    composite acquisition function) that requires only one model, dataset pair.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="SingleModelAcquisitionBuilder.using"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.SingleModelAcquisitionBuilder.using">[docs]</a>    <span class="k">def</span> <span class="nf">using</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunctionBuilder</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param tag: The tag for the model, dataset pair to use to build this acquisition function.</span>
+<span class="sd">        :return: An acquisition function builder that selects the model and dataset specified by</span>
+<span class="sd">            ``tag``, as defined in :meth:`prepare_acquisition_function`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">single_builder</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="k">class</span> <span class="nc">_Anon</span><span class="p">(</span><span class="n">AcquisitionFunctionBuilder</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">prepare_acquisition_function</span><span class="p">(</span>
+                <span class="bp">self</span><span class="p">,</span> <span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">],</span> <span class="n">models</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelInterface</span><span class="p">]</span>
+            <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunction</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">single_builder</span><span class="o">.</span><span class="n">prepare_acquisition_function</span><span class="p">(</span><span class="n">datasets</span><span class="p">[</span><span class="n">tag</span><span class="p">],</span> <span class="n">models</span><span class="p">[</span><span class="n">tag</span><span class="p">])</span>
+
+            <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">single_builder</span><span class="si">!r}</span><span class="s2"> using tag </span><span class="si">{</span><span class="n">tag</span><span class="si">!r}</span><span class="s2">&quot;</span>
+
+        <span class="k">return</span> <span class="n">_Anon</span><span class="p">()</span></div>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="SingleModelAcquisitionBuilder.prepare_acquisition_function"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.SingleModelAcquisitionBuilder.prepare_acquisition_function">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_acquisition_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunction</span><span class="p">:</span></div></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param dataset: The data to use to build the acquisition function.</span>
+<span class="sd">        :param model: The model over the specified ``dataset``.</span>
+<span class="sd">        :return: An acquisition function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="ExpectedImprovement"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.ExpectedImprovement">[docs]</a><span class="k">class</span> <span class="nc">ExpectedImprovement</span><span class="p">(</span><span class="n">SingleModelAcquisitionBuilder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder for the expected improvement function where the &quot;best&quot; value is taken to be the minimum</span>
+<span class="sd">    of the posterior mean at observed points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="ExpectedImprovement.prepare_acquisition_function"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.ExpectedImprovement.prepare_acquisition_function">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_acquisition_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunction</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param dataset: Unused.</span>
+<span class="sd">        :param model: The model over the specified ``dataset``.</span>
+<span class="sd">        :return: The expected improvement function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mean</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">query_points</span><span class="p">)</span>
+        <span class="n">eta</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_min</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">at</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquisition_function</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_acquisition_function</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">eta</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">expected_improvement</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">eta</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="expected_improvement"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.expected_improvement">[docs]</a><span class="k">def</span> <span class="nf">expected_improvement</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">eta</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The Expected Improvement (EI) acquisition function for single-objective global optimization.</span>
+<span class="sd">    Return the expectation of the improvement at ``at`` over the current &quot;best&quot; observation ``eta``,</span>
+<span class="sd">    where an improvement moves towards the objective function&#39;s minimum, and the expectation is</span>
+<span class="sd">    calculated with respect to the ``model`` posterior. For model posterior :math:`f`, this is</span>
+
+<span class="sd">    .. math:: x \mapsto \mathbb E \left[ \max (\eta - f(x), 0) \right]</span>
+
+<span class="sd">    This function was introduced by Mockus et al, 1975. See the following for details:</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">       @article{Jones:1998,</span>
+<span class="sd">            title={Efficient global optimization of expensive black-box functions},</span>
+<span class="sd">            author={Jones, Donald R and Schonlau, Matthias and Welch, William J},</span>
+<span class="sd">            journal={Journal of Global optimization},</span>
+<span class="sd">            volume={13},</span>
+<span class="sd">            number={4},</span>
+<span class="sd">            pages={455--492},</span>
+<span class="sd">            year={1998},</span>
+<span class="sd">            publisher={Springer}</span>
+<span class="sd">       }</span>
+
+<span class="sd">    :param model: The model of the objective function.</span>
+<span class="sd">    :param eta: The &quot;best&quot; observation.</span>
+<span class="sd">    :param at: The points for which to calculate the expected improvement.</span>
+<span class="sd">    :return: The expected improvement at ``at``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+    <span class="n">normal</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">eta</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span> <span class="o">*</span> <span class="n">normal</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span> <span class="o">+</span> <span class="n">variance</span> <span class="o">*</span> <span class="n">normal</span><span class="o">.</span><span class="n">prob</span><span class="p">(</span><span class="n">eta</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NegativeLowerConfidenceBound"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.NegativeLowerConfidenceBound">[docs]</a><span class="k">class</span> <span class="nc">NegativeLowerConfidenceBound</span><span class="p">(</span><span class="n">SingleModelAcquisitionBuilder</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder for the negative of the lower confidence bound. The lower confidence bound is typically</span>
+<span class="sd">    minimised, so the negative is suitable for maximisation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.96</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param beta: Weighting given to the variance contribution to the lower confidence bound.</span>
+<span class="sd">            Must not be negative.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span> <span class="o">=</span> <span class="n">beta</span>
+
+<div class="viewcode-block" id="NegativeLowerConfidenceBound.prepare_acquisition_function"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.NegativeLowerConfidenceBound.prepare_acquisition_function">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_acquisition_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunction</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param dataset: Unused.</span>
+<span class="sd">        :param model: The model over the specified ``dataset``.</span>
+<span class="sd">        :return: The negative of the lower confidence bound function. This function will raise</span>
+<span class="sd">            `ValueError` if ``beta`` is negative.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">at</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquisition_function</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_acquisition_function</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="o">-</span><span class="n">lower_confidence_bound</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="NegativePredictiveMean"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.NegativePredictiveMean">[docs]</a><span class="k">class</span> <span class="nc">NegativePredictiveMean</span><span class="p">(</span><span class="n">NegativeLowerConfidenceBound</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder for the negative of the predictive mean. The predictive mean is minimised on minimising</span>
+<span class="sd">    the objective function. The negative predictive mean is therefore maximised.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="lower_confidence_bound"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.lower_confidence_bound">[docs]</a><span class="k">def</span> <span class="nf">lower_confidence_bound</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The lower confidence bound (LCB) acquisition function for single-objective global optimization.</span>
+
+<span class="sd">    .. math:: x^* \mapsto \mathbb{E} [f(x^*)|x, y] - \beta \sqrt{ \mathrm{Var}[f(x^*)|x, y] }</span>
+
+<span class="sd">    See the following for details:</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        @inproceedings{Srinivas:2010,</span>
+<span class="sd">            author = &quot;Srinivas, Niranjan and Krause, Andreas and Seeger, Matthias and Kakade, Sham M.&quot;,</span>
+<span class="sd">            booktitle = &quot;{Proceedings of the 27th International Conference on Machine Learning (ICML-10)}&quot;,</span>
+<span class="sd">            editor = &quot;F{\&quot;u}rnkranz, Johannes and Joachims, Thorsten&quot;,</span>
+<span class="sd">            pages = &quot;1015--1022&quot;,</span>
+<span class="sd">            publisher = &quot;Omnipress&quot;,</span>
+<span class="sd">            title = &quot;{Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design}&quot;,</span>
+<span class="sd">            year = &quot;2010&quot;</span>
+<span class="sd">        }</span>
+
+<span class="sd">    :param model: The model of the objective function.</span>
+<span class="sd">    :param beta: The weight to give to the standard deviation contribution of the LCB. Must not be</span>
+<span class="sd">        negative.</span>
+<span class="sd">    :param at: The points at which to evaluate the LCB.</span>
+<span class="sd">    :return: The lower confidence bound at ``at``.</span>
+<span class="sd">    :raise ValueError: If ``beta`` is negative.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">beta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Standard deviation scaling parameter beta must not be negative, got </span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">mean</span><span class="p">,</span> <span class="n">variance</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">mean</span> <span class="o">-</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">variance</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ProbabilityOfFeasibility"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.ProbabilityOfFeasibility">[docs]</a><span class="k">class</span> <span class="nc">ProbabilityOfFeasibility</span><span class="p">(</span><span class="n">SingleModelAcquisitionBuilder</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Builder for the :func:`probability_of_feasibility` acquisition function, defined in</span>
+<span class="sd">    Garner, 2014 as</span>
+
+<span class="sd">    .. math:: \int_{-\infty}^{\tau} p(c(\mathbf{x}) | \mathbf{x}, \mathcal{D}) \mathrm{d} c(\mathbf{x}) \qquad ,</span>
+
+<span class="sd">    where :math:`\tau` is a threshold. Values below the threshold are considered feasible by the</span>
+<span class="sd">    constraint function. See the following for details:</span>
+
+<span class="sd">    ::</span>
+
+<span class="sd">        @inproceedings{gardner14,</span>
+<span class="sd">            title={Bayesian Optimization with Inequality Constraints},</span>
+<span class="sd">            author={Jacob Gardner and Matt Kusner and Zhixiang and Kilian Weinberger and John Cunningham},</span>
+<span class="sd">            booktitle={Proceedings of the 31st International Conference on Machine Learning},</span>
+<span class="sd">            year={2014},</span>
+<span class="sd">            volume={32},</span>
+<span class="sd">            number={2},</span>
+<span class="sd">            series={Proceedings of Machine Learning Research},</span>
+<span class="sd">            month={22--24 Jun},</span>
+<span class="sd">            publisher={PMLR},</span>
+<span class="sd">            url={http://proceedings.mlr.press/v32/gardner14.html},</span>
+<span class="sd">        }</span>
+
+<span class="sd">        @article{schonlau1998global,</span>
+<span class="sd">            title={Global versus local search in constrained optimization of computer models},</span>
+<span class="sd">            author={Schonlau, Matthias and Welch, William J and Jones, Donald R},</span>
+<span class="sd">            journal={Lecture Notes-Monograph Series},</span>
+<span class="sd">            pages={11--25},</span>
+<span class="sd">            year={1998},</span>
+<span class="sd">            publisher={JSTOR}</span>
+<span class="sd">        }</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param threshold: The (scalar) probability of feasibility threshold.</span>
+<span class="sd">        :raise ValueError (or InvalidArgumentError): If ``threshold`` is not a scalar.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">debugging</span><span class="o">.</span><span class="n">assert_scalar</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="ProbabilityOfFeasibility.threshold"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.ProbabilityOfFeasibility.threshold">[docs]</a>    <span class="k">def</span> <span class="nf">threshold</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot; The probability of feasibility threshold. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span></div>
+
+<div class="viewcode-block" id="ProbabilityOfFeasibility.prepare_acquisition_function"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/function/index.html#trieste.acquisition.function.ProbabilityOfFeasibility.prepare_acquisition_function">[docs]</a>    <span class="k">def</span> <span class="nf">prepare_acquisition_function</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquisitionFunction</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param dataset: Unused.</span>
+<span class="sd">        :param model: The model over the specified ``dataset``.</span>
+<span class="sd">        :return: The probability of feasibility acquisition function.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="k">lambda</span> <span class="n">at</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquisition_function</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_acquisition_function</span><span class="p">(</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">probability_of_feasibility</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">at</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="probability_of_feasibility"><a class="viewcode-back" href="../../../autoapi/trieste/acquisition/index.html#trieste.acquisition.function.probability_of_feasibility">[docs]</a><span class="k">def</span> <span class="nf">probability_of_feasibility</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The probability of feasibility acquisition function defined in Garner, 2014 as</span>
+
+<span class="sd">    .. math:: \int_{-\infty}^{\tau} p(c(\mathbf{x}) | \mathbf{x}, \mathcal{D}) \mathrm{d}c(\mathbf{x}) \qquad ,</span>
+
+<span class="sd">    where :math:`\tau` is a threshold. Values below the threshold are considered feasible by the</span>
+<span class="sd">    constraint function.</span>
+
+<span class="sd">    :param model: The model of the objective function.</span>
+<span class="sd">    :param threshold: The (scalar) probability of feasibility threshold.</span>
+<span class="sd">    :param at: The points at which to evaluate the probability of feasibility. Must have rank at</span>
+<span class="sd">        least two</span>
+<span class="sd">    :return: The probability of feasibility at ``at``.</span>
+<span class="sd">    :raise ValueError (or InvalidArgumentError): If arguments have the incorrect shape.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">debugging</span><span class="o">.</span><span class="n">assert_scalar</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+    <span class="n">tf</span><span class="o">.</span><span class="n">debugging</span><span class="o">.</span><span class="n">assert_rank_at_least</span><span class="p">(</span><span class="n">at</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">mean</span><span class="p">,</span> <span class="n">var</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">at</span><span class="p">)</span>
+    <span class="n">distr</span> <span class="o">=</span> <span class="n">tfp</span><span class="o">.</span><span class="n">distributions</span><span class="o">.</span><span class="n">Normal</span><span class="p">(</span><span class="n">mean</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">distr</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">threshold</span><span class="p">,</span> <span class="n">at</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span></div>
+</pre></div>
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright Copyright 2020 The Trieste Contributors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.&#34;
+.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

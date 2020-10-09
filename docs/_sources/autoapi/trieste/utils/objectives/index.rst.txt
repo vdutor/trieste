@@ -1,0 +1,43 @@
+:mod:`trieste.utils.objectives`
+===============================
+
+.. py:module:: trieste.utils.objectives
+
+.. autoapi-nested-parse::
+
+   This module contains toy objective functions, useful for experimentation. 
+
+
+
+Module Contents
+---------------
+
+.. function:: branin(x: TensorType) -> TensorType
+
+   The Branin-Hoo function, rescaled to have zero mean and unit variance over :math:`[0, 1]^2`, see
+   `here <https://www.sfu.ca/~ssurjano/branin.html>`_ for details.
+
+   :param x: Array of two-dimensional points at which to evaluate the function. Shape (..., N, 2).
+   :return: The values of the rescaled Branin-Hoo at points in ``x``. Shape (..., N, 1).
+   :raise ValueError (or InvalidArgumentError): If the points in ``x`` are not two-dimensional.
+
+
+.. data:: BRANIN_GLOBAL_ARGMIN
+   
+
+   The three global minimizers of the :func:`branin` function. 
+
+
+.. data:: BRANIN_GLOBAL_MINIMUM
+   
+
+   The global miminum of the :func:`branin` function. 
+
+
+.. function:: mk_observer(objective: Callable[[tf.Tensor], tf.Tensor], key: str) -> Observer
+
+   :param objective: An objective function designed to be used with a single data set and model.
+   :param key: The key to use to access the data from the observer result.
+   :return: An observer returning the data from ``objective`` with the specified ``key``.
+
+

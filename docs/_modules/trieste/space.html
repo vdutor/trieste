@@ -1,0 +1,351 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trieste.space &#8212; trieste 0.2.0 documentation</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../../index.html">
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../autoapi/trieste/index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../tutorials.html">Tutorials</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/secondmind-labs/trieste" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <h1>Source code for trieste.space</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2020 The Trieste Contributors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+<span class="sd">&quot;&quot;&quot; This module contains implementations of various types of search space. &quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">abstractmethod</span><span class="p">,</span> <span class="n">ABC</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+
+<span class="kn">from</span> <span class="nn">.type</span> <span class="kn">import</span> <span class="n">TensorType</span>
+<span class="kn">from</span> <span class="nn">.utils</span> <span class="kn">import</span> <span class="n">shapes_equal</span>
+
+
+<div class="viewcode-block" id="SearchSpace"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.SearchSpace">[docs]</a><span class="k">class</span> <span class="nc">SearchSpace</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A :class:`SearchSpace` represents the domain over which an objective function is optimized.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="SearchSpace.sample"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.SearchSpace.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param num_samples: The number of points to sample from this search space.</span>
+<span class="sd">        :return: ``num_samples`` i.i.d. random points, sampled uniformly from this search space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="SearchSpace.__contains__"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.SearchSpace.__contains__">[docs]</a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TensorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span></div></div>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param value: A point to check for membership of this :class:`SearchSpace`.</span>
+<span class="sd">        :return: `True` if ``value`` is a member of this search space, else `False`. May return a</span>
+<span class="sd">            scalar boolean `tf.Tensor` instead of the `bool` itself.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="DiscreteSearchSpace"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.DiscreteSearchSpace">[docs]</a><span class="k">class</span> <span class="nc">DiscreteSearchSpace</span><span class="p">(</span><span class="n">SearchSpace</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A discrete :class:`SearchSpace` representing a finite set of :math:`D`-dimensional points in</span>
+<span class="sd">    :math:`\mathbb{R}^D`.</span>
+
+<span class="sd">    For example:</span>
+
+<span class="sd">        &gt;&gt;&gt; points = tf.constant([[-1.0, 0.4], [-1.0, 0.6], [0.0, 0.4]])</span>
+<span class="sd">        &gt;&gt;&gt; search_space = DiscreteSearchSpace(points)</span>
+<span class="sd">        &gt;&gt;&gt; assert tf.constant([0.0, 0.4]) in search_space</span>
+<span class="sd">        &gt;&gt;&gt; assert tf.constant([1.0, 0.5]) not in search_space</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">points</span><span class="p">:</span> <span class="n">TensorType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param points: The points that define the discrete space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_points</span> <span class="o">=</span> <span class="n">points</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="DiscreteSearchSpace.points"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.DiscreteSearchSpace.points">[docs]</a>    <span class="k">def</span> <span class="nf">points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TensorType</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; All the points in this space. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_points</span></div>
+
+<div class="viewcode-block" id="DiscreteSearchSpace.__contains__"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.DiscreteSearchSpace.__contains__">[docs]</a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TensorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">==</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_points</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+            <span class="n">is_point_for_all_points</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_all</span><span class="p">(</span><span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_points</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_any</span><span class="p">(</span><span class="n">is_point_for_all_points</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="DiscreteSearchSpace.sample"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.DiscreteSearchSpace.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param num_samples: The number of points to sample from this search space.</span>
+<span class="sd">        :return: ``num_samples`` i.i.d. random points, sampled uniformly, and without replacement,</span>
+<span class="sd">            from this search space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">num_points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_points</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">num_samples</span> <span class="o">&gt;</span> <span class="n">num_points</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Number of samples cannot be greater than the number of points&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">num_points</span><span class="si">}</span><span class="s2"> in discrete search space, got </span><span class="si">{</span><span class="n">num_samples</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_points</span><span class="p">)[:</span><span class="n">num_samples</span><span class="p">,</span> <span class="p">:]</span></div></div>
+
+
+<div class="viewcode-block" id="Box"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.Box">[docs]</a><span class="k">class</span> <span class="nc">Box</span><span class="p">(</span><span class="n">SearchSpace</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Continuous :class:`SearchSpace` representing a :math:`D`-dimensional box in</span>
+<span class="sd">    :math:`\mathbb{R}^D`. Mathematically it is equivalent to the Cartesian product of :math:`D`</span>
+<span class="sd">    closed bounded intervals in :math:`\mathbb{R}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="n">TensorType</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="n">TensorType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param lower: The lower (inclusive) bounds of the box.</span>
+<span class="sd">        :param upper: The upper (inclusive) bounds of the box.</span>
+<span class="sd">        :raise ValueError: If ``lower`` and ``upper`` have different shapes. Or if ``upper`` is not</span>
+<span class="sd">            greater than ``lower`` across all dimensions.</span>
+<span class="sd">        :raise TypeError: If ``lower`` and ``upper`` have different dtypes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">shapes_equal</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="n">upper</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Lower and upper bounds must have the same shape, got </span><span class="si">{</span><span class="n">lower</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">upper</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">lower</span><span class="o">.</span><span class="n">dtype</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">upper</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Lower and upper bounds must have the same dtype, got </span><span class="si">{</span><span class="n">lower</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">upper</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_any</span><span class="p">(</span><span class="n">lower</span> <span class="o">&gt;=</span> <span class="n">upper</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Upper bound must be greater that lower for all dimensions, got lower bound&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">lower</span><span class="si">}</span><span class="s2"> and upper </span><span class="si">{</span><span class="n">upper</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lower</span> <span class="o">=</span> <span class="n">lower</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_upper</span> <span class="o">=</span> <span class="n">upper</span>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Box.lower"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.Box.lower">[docs]</a>    <span class="k">def</span> <span class="nf">lower</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TensorType</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; The lower bounds of the box. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lower</span></div>
+
+    <span class="nd">@property</span>
+<div class="viewcode-block" id="Box.upper"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.Box.upper">[docs]</a>    <span class="k">def</span> <span class="nf">upper</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TensorType</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot; The upper bounds of the box. &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upper</span></div>
+
+<div class="viewcode-block" id="Box.__contains__"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.Box.__contains__">[docs]</a>    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">TensorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return `True` if ``value`` is a member of this search space, else `False`. A point is a</span>
+<span class="sd">        member if all of its coordinates lie in the closed intervals bounded by the lower and upper</span>
+<span class="sd">        bounds.</span>
+
+<span class="sd">        :param value: A point to check for membership of this :class:`SearchSpace`.</span>
+<span class="sd">        :return: `True` if ``value`` is a member of this search space, else `False`. May return a</span>
+<span class="sd">            scalar boolean `tf.Tensor` instead of the `bool` itself.</span>
+<span class="sd">        :raise ValueError: If ``value`` has a different shape from the search space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">shapes_equal</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lower</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Point must have the same shape as the Box bounds, got </span><span class="si">{</span><span class="n">value</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, expected&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_lower</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_all</span><span class="p">(</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lower</span><span class="p">)</span> <span class="ow">and</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_all</span><span class="p">(</span><span class="n">value</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upper</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Box.sample"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.Box.sample">[docs]</a>    <span class="k">def</span> <span class="nf">sample</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">tf</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">dim</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lower</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span>
+            <span class="p">(</span><span class="n">num_samples</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span> <span class="n">minval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lower</span><span class="p">,</span> <span class="n">maxval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_upper</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lower</span><span class="o">.</span><span class="n">dtype</span></div>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="Box.discretize"><a class="viewcode-back" href="../../autoapi/trieste/space/index.html#trieste.space.Box.discretize">[docs]</a>    <span class="k">def</span> <span class="nf">discretize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DiscreteSearchSpace</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param num_samples: The number of points in the :class:`DiscreteSearchSpace`.</span>
+<span class="sd">        :return: A discrete search space consisting of ``num_samples`` points sampled uniformly from</span>
+<span class="sd">            this :class:`Box`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DiscreteSearchSpace</span><span class="p">(</span><span class="n">points</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">num_samples</span><span class="p">))</span></div></div>
+</pre></div>
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright Copyright 2020 The Trieste Contributors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.&#34;
+.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

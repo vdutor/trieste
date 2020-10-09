@@ -1,0 +1,334 @@
+:mod:`trieste.acquisition`
+==========================
+
+.. py:module:: trieste.acquisition
+
+.. autoapi-nested-parse::
+
+   The acquisition process aims to find the optimal point(s) at which to next evaluate the objective
+   function, with the aim of minimising it. The functionality in this package implements that process.
+   It typically uses the current observations of the objective function, or a posterior over those
+   observations.
+
+   In this library, the acquisition rule is the central object of the API, while acquisition functions
+   are supplementary. This is because some acquisition rules, such as Thompson sampling,
+   do not require an acquisition function. This contrasts with other libraries which may consider
+   the acquisition function as the central component of this process and assume Efficient Global
+   Optimization (EGO) for the acquisition rule.
+
+   This package contains acquisition rules, as implementations of
+   :class:`~trieste.acquisition.rule.AcquisitionRule`, and acquisition functions. It also contains
+   :class:`AcquisitionBuilder`\ s which provide a common interface for the rules to build acquisition
+   functions.
+
+   Acquisition rules in this library that use acquisition functions, such as
+   :class:`EfficientGlobalOptimization`, *maximize* these functions. This defines the sign the
+   acquisition function should take. Additionally, acquisition functions and builders in this library
+   are designed to minimize the objective function. For example, we do not provide an implementation of
+   UCB.
+
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   rule/index.rst
+
+
+Package Contents
+----------------
+
+.. data:: AcquisitionFunction
+   
+
+   Type alias for acquisition functions. 
+
+
+.. py:class:: AcquisitionFunctionBuilder
+
+   Bases: :class:`abc.ABC`
+
+   An :class:`AcquisitionFunctionBuilder` builds an acquisition function. 
+
+   .. method:: prepare_acquisition_function(self, datasets: Mapping[str, Dataset], models: Mapping[str, ModelInterface]) -> AcquisitionFunction
+      :abstractmethod:
+
+      :param datasets: The data from the observer.
+      :param models: The models over each dataset in ``datasets``.
+      :return: An acquisition function.
+
+
+
+.. py:class:: SingleModelAcquisitionBuilder
+
+   Bases: :class:`abc.ABC`
+
+   Convenience acquisition function builder for an acquisition function (or component of a
+   composite acquisition function) that requires only one model, dataset pair.
+
+   .. method:: using(self, tag: str) -> AcquisitionFunctionBuilder
+
+      :param tag: The tag for the model, dataset pair to use to build this acquisition function.
+      :return: An acquisition function builder that selects the model and dataset specified by
+          ``tag``, as defined in :meth:`prepare_acquisition_function`.
+
+
+   .. method:: prepare_acquisition_function(self, dataset: Dataset, model: ModelInterface) -> AcquisitionFunction
+      :abstractmethod:
+
+      :param dataset: The data to use to build the acquisition function.
+      :param model: The model over the specified ``dataset``.
+      :return: An acquisition function.
+
+
+
+.. py:class:: ExpectedImprovement
+
+   Bases: :class:`trieste.acquisition.function.SingleModelAcquisitionBuilder`
+
+   Builder for the expected improvement function where the "best" value is taken to be the minimum
+   of the posterior mean at observed points.
+
+   .. method:: prepare_acquisition_function(self, dataset: Dataset, model: ModelInterface) -> AcquisitionFunction
+
+      :param dataset: Unused.
+      :param model: The model over the specified ``dataset``.
+      :return: The expected improvement function.
+
+
+
+.. function:: expected_improvement(model: ModelInterface, eta: tf.Tensor, at: QueryPoints) -> tf.Tensor
+
+   The Expected Improvement (EI) acquisition function for single-objective global optimization.
+   Return the expectation of the improvement at ``at`` over the current "best" observation ``eta``,
+   where an improvement moves towards the objective function's minimum, and the expectation is
+   calculated with respect to the ``model`` posterior. For model posterior :math:`f`, this is
+
+   .. math:: x \mapsto \mathbb E \left[ \max (\eta - f(x), 0) \right]
+
+   This function was introduced by Mockus et al, 1975. See the following for details:
+
+   ::
+
+      @article{Jones:1998,
+           title={Efficient global optimization of expensive black-box functions},
+           author={Jones, Donald R and Schonlau, Matthias and Welch, William J},
+           journal={Journal of Global optimization},
+           volume={13},
+           number={4},
+           pages={455--492},
+           year={1998},
+           publisher={Springer}
+      }
+
+   :param model: The model of the objective function.
+   :param eta: The "best" observation.
+   :param at: The points for which to calculate the expected improvement.
+   :return: The expected improvement at ``at``.
+
+
+.. py:class:: NegativeLowerConfidenceBound(beta: float = 1.96)
+
+   Bases: :class:`trieste.acquisition.function.SingleModelAcquisitionBuilder`
+
+   Builder for the negative of the lower confidence bound. The lower confidence bound is typically
+   minimised, so the negative is suitable for maximisation.
+
+   :param beta: Weighting given to the variance contribution to the lower confidence bound.
+       Must not be negative.
+
+   .. method:: prepare_acquisition_function(self, dataset: Dataset, model: ModelInterface) -> AcquisitionFunction
+
+      :param dataset: Unused.
+      :param model: The model over the specified ``dataset``.
+      :return: The negative of the lower confidence bound function. This function will raise
+          `ValueError` if ``beta`` is negative.
+
+
+
+.. py:class:: NegativePredictiveMean
+
+   Bases: :class:`trieste.acquisition.function.NegativeLowerConfidenceBound`
+
+   Builder for the negative of the predictive mean. The predictive mean is minimised on minimising
+   the objective function. The negative predictive mean is therefore maximised.
+
+   :param beta: Weighting given to the variance contribution to the lower confidence bound.
+       Must not be negative.
+
+
+.. function:: lower_confidence_bound(model: ModelInterface, beta: float, at: QueryPoints) -> tf.Tensor
+
+   The lower confidence bound (LCB) acquisition function for single-objective global optimization.
+
+   .. math:: x^* \mapsto \mathbb{E} [f(x^*)|x, y] - \beta \sqrt{ \mathrm{Var}[f(x^*)|x, y] }
+
+   See the following for details:
+
+   ::
+
+       @inproceedings{Srinivas:2010,
+           author = "Srinivas, Niranjan and Krause, Andreas and Seeger, Matthias and Kakade, Sham M.",
+           booktitle = "{Proceedings of the 27th International Conference on Machine Learning (ICML-10)}",
+           editor = "F{\"u}rnkranz, Johannes and Joachims, Thorsten",
+           pages = "1015--1022",
+           publisher = "Omnipress",
+           title = "{Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design}",
+           year = "2010"
+       }
+
+   :param model: The model of the objective function.
+   :param beta: The weight to give to the standard deviation contribution of the LCB. Must not be
+       negative.
+   :param at: The points at which to evaluate the LCB.
+   :return: The lower confidence bound at ``at``.
+   :raise ValueError: If ``beta`` is negative.
+
+
+.. py:class:: ProbabilityOfFeasibility(threshold: Union[float, tf.Tensor])
+
+   Bases: :class:`trieste.acquisition.function.SingleModelAcquisitionBuilder`
+
+   Builder for the :func:`probability_of_feasibility` acquisition function, defined in
+   Garner, 2014 as
+
+   .. math:: \int_{-\infty}^{\tau} p(c(\mathbf{x}) | \mathbf{x}, \mathcal{D}) \mathrm{d} c(\mathbf{x}) \qquad ,
+
+   where :math:`\tau` is a threshold. Values below the threshold are considered feasible by the
+   constraint function. See the following for details:
+
+   ::
+
+       @inproceedings{gardner14,
+           title={Bayesian Optimization with Inequality Constraints},
+           author={Jacob Gardner and Matt Kusner and Zhixiang and Kilian Weinberger and John Cunningham},
+           booktitle={Proceedings of the 31st International Conference on Machine Learning},
+           year={2014},
+           volume={32},
+           number={2},
+           series={Proceedings of Machine Learning Research},
+           month={22--24 Jun},
+           publisher={PMLR},
+           url={http://proceedings.mlr.press/v32/gardner14.html},
+       }
+
+       @article{schonlau1998global,
+           title={Global versus local search in constrained optimization of computer models},
+           author={Schonlau, Matthias and Welch, William J and Jones, Donald R},
+           journal={Lecture Notes-Monograph Series},
+           pages={11--25},
+           year={1998},
+           publisher={JSTOR}
+       }
+
+
+   :param threshold: The (scalar) probability of feasibility threshold.
+   :raise ValueError (or InvalidArgumentError): If ``threshold`` is not a scalar.
+
+   .. method:: threshold(self) -> Union[float, tf.Tensor]
+      :property:
+
+      The probability of feasibility threshold. 
+
+
+   .. method:: prepare_acquisition_function(self, dataset: Dataset, model: ModelInterface) -> AcquisitionFunction
+
+      :param dataset: Unused.
+      :param model: The model over the specified ``dataset``.
+      :return: The probability of feasibility acquisition function.
+
+
+
+.. function:: probability_of_feasibility(model: ModelInterface, threshold: Union[float, tf.Tensor], at: QueryPoints) -> tf.Tensor
+
+   The probability of feasibility acquisition function defined in Garner, 2014 as
+
+   .. math:: \int_{-\infty}^{\tau} p(c(\mathbf{x}) | \mathbf{x}, \mathcal{D}) \mathrm{d}c(\mathbf{x}) \qquad ,
+
+   where :math:`\tau` is a threshold. Values below the threshold are considered feasible by the
+   constraint function.
+
+   :param model: The model of the objective function.
+   :param threshold: The (scalar) probability of feasibility threshold.
+   :param at: The points at which to evaluate the probability of feasibility. Must have rank at
+       least two
+   :return: The probability of feasibility at ``at``.
+   :raise ValueError (or InvalidArgumentError): If arguments have the incorrect shape.
+
+
+.. py:class:: Reducer(*builders: AcquisitionFunctionBuilder)
+
+   Bases: :class:`trieste.acquisition.function.AcquisitionFunctionBuilder`
+
+   A :class:`Reducer` builds an :func:`~trieste.acquisition.AcquisitionFunction` whose output is
+   calculated from the outputs of a number of other
+   :func:`~trieste.acquisition.AcquisitionFunction`\ s. How these outputs are composed is
+   defined by the method :meth:`_reduce`.
+
+   :param \*builders: Acquisition function builders. At least one must be provided.
+   :raise ValueError: If no builders are specified.
+
+   .. method:: prepare_acquisition_function(self, datasets: Mapping[str, Dataset], models: Mapping[str, ModelInterface]) -> AcquisitionFunction
+
+      Return an acquisition function. This acquisition function is defined by first building
+      acquisition functions from each of the
+      :class:`~trieste.acquisition.AcquisitionFunctionBuilder`\ s specified at
+      :meth:`__init__`, then reducing, with :meth:`_reduce`, the output of each of those
+      acquisition functions.
+
+      :param datasets: The data from the observer.
+      :param models: The models over each dataset in ``datasets``.
+      :return: The reduced acquisition function.
+
+
+   .. method:: acquisitions(self) -> Sequence[AcquisitionFunctionBuilder]
+      :property:
+
+      The acquisition function builders specified at class initialisation. 
+
+
+   .. method:: _reduce(self, inputs: Sequence[tf.Tensor]) -> tf.Tensor
+      :abstractmethod:
+
+      :param inputs: The output of each constituent acquisition function.
+      :return: The output of the reduced acquisition function.
+
+
+
+.. py:class:: Product(*builders: AcquisitionFunctionBuilder)
+
+   Bases: :class:`trieste.acquisition.combination.Reducer`
+
+   :class:`Reducer` whose resulting acquisition function returns the element-wise product of the
+   outputs of constituent acquisition functions.
+
+   :param \*builders: Acquisition function builders. At least one must be provided.
+   :raise ValueError: If no builders are specified.
+
+   .. method:: _reduce(self, inputs: Sequence[tf.Tensor]) -> tf.Tensor
+
+      :param inputs: The outputs of each acquisition function.
+      :return: The element-wise product of the ``inputs``.
+
+
+
+.. py:class:: Sum(*builders: AcquisitionFunctionBuilder)
+
+   Bases: :class:`trieste.acquisition.combination.Reducer`
+
+   :class:`Reducer` whose resulting acquisition function returns the element-wise sum of the
+   outputs of constituent acquisition functions.
+
+   :param \*builders: Acquisition function builders. At least one must be provided.
+   :raise ValueError: If no builders are specified.
+
+   .. method:: _reduce(self, inputs: Sequence[tf.Tensor]) -> tf.Tensor
+
+      :param inputs: The outputs of each acquisition function.
+      :return: The element-wise sum of the ``inputs``.
+
+
+

@@ -1,0 +1,104 @@
+:mod:`trieste.bayesian_optimizer`
+=================================
+
+.. py:module:: trieste.bayesian_optimizer
+
+.. autoapi-nested-parse::
+
+   This module contains the :class:`BayesianOptimizer` class, used to perform Bayesian optimization.
+
+
+
+Module Contents
+---------------
+
+.. data:: S
+   
+
+   Unbound type variable. 
+
+
+.. data:: SP
+   
+
+   Type variable bound to :class:`SearchSpace`. 
+
+
+.. py:class:: LoggingState
+
+   Bases: :class:`Generic[S]`
+
+   Container used to track the state of the optimization process in :class:`BayesianOptimizer`.
+
+
+.. py:class:: OptimizationResult
+
+   Bases: :class:`Generic[S]`
+
+   Container for the result of the optimization process in :class:`BayesianOptimizer`. 
+
+
+.. py:class:: BayesianOptimizer(observer: Observer, search_space: SP)
+
+   Bases: :class:`Generic[SP]`
+
+   This class performs Bayesian optimization, the data efficient optimization of an expensive
+   black-box *objective function* over some *search space*. Since we may not have access to the
+   objective function itself, we speak instead of an *observer* that observes it.
+
+   :param observer: The observer of the objective function.
+   :param search_space: The space over which to search. Must be a
+       :class:`~trieste.space.SearchSpace`.
+
+   .. method:: optimize(self, num_steps: int, datasets: Mapping[str, Dataset], model_specs: Mapping[str, ModelSpec], acquisition_rule: Optional[AcquisitionRule[S, SP]] = None, acquisition_state: Optional[S] = None, track_state: bool = True) -> OptimizationResult[S]
+
+      Attempt to find the minimizer of the ``observer`` in the ``search_space`` (both specified at
+      :meth:`__init__`). This is the central implementation of the Bayesian optimization loop.
+
+      For each step in ``num_steps``, this method:
+          - Finds the next points with which to query the ``observer`` using the
+            ``acquisition_rule``'s :meth:`acquire` method, passing it the ``search_space``,
+            ``datasets`` and models built from the ``model_specs``.
+          - Queries the ``observer`` *once* at those points.
+          - Updates the datasets and models with the data from the ``observer``.
+
+      Within the optimization loop, this method will catch any errors raised and return them
+      instead, along with the latest data, models, and the history of the optimization process.
+      This enables the caller to restart the optimization loop from the latest successful step.
+      **Note that if an error occurred, the latest data and models might not be from the
+      ``num_steps``-th optimization step, but from the step where the error occurred. It is up to
+      the caller to check if this has happened, by checking if the result's `error` attribute is
+      populated.** Any errors encountered within this method, but outside the optimization loop,
+      will be raised as normal. These are documented below.
+
+      **Type hints:**
+          - The ``acquisition_rule`` must use the same type of
+            :class:`~trieste.space.SearchSpace` as specified in :meth:`__init__`.
+          - The history, if populated, will contain an acquisition state of the same type as used
+            by the ``acquisition_rule``.
+
+      :param num_steps: The number of optimization steps to run.
+      :param datasets: The known observer query points and observations for each tag.
+      :param model_specs: The model to use for each :class:`~trieste.datasets.Dataset` (matched
+          by tag).
+      :param acquisition_rule: The acquisition rule, which defines how to search for a new point
+          on each optimization step. Defaults to
+          :class:`~trieste.acquisition.rule.EfficientGlobalOptimization` with default
+          arguments. Note that if the default is used, this implies the tags must be
+          `OBJECTIVE`, the search space can be any :class:`~trieste.space.SearchSpace`, and the
+          acquisition state returned in the :class:`OptimizationResult` will be `None`.
+      :param acquisition_state: The acquisition state to use on the first optimization step.
+          This argument allows the caller to restore the optimization process from a previous
+          :class:`LoggingState`.
+      :param track_state: If `True`, this method saves the optimization state at the start of each
+          step.
+      :return: The updated models, data, history containing information from every optimization
+          step (see ``track_state``), and the error if any error was encountered during
+          optimization.
+      :raise ValueError: If any of the following are true:
+          - the keys in ``datasets`` and ``model_specs`` do not match
+          - ``datasets`` or ``model_specs`` are empty
+          - the default `acquisition_rule` is used and the tags are not `OBJECTIVE`.
+
+
+

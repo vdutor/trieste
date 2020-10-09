@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trieste.acquisition &#8212; trieste 0.2.0 documentation</title>
+    
+  <link rel="stylesheet" href="../../../_static/css/index.d431a4ee1c1efae0e38bdfebc22debff.css">
+
+    
+  <link rel="stylesheet"
+    href="../../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../../_static/basic.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    
+  <link rel="preload" as="script" href="../../../_static/js/index.30270b6e4c972e43c488.js">
+
+    <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="trieste.acquisition.rule" href="rule/index.html" />
+    <link rel="prev" title="trieste" href="../index.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main">
+<div class="container-xl">
+
+    
+    <a class="navbar-brand" href="../../../index.html">
+      <img src="../../../_static/logo.png" class="logo" alt="logo">
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar-menu" class="col-lg-9 collapse navbar-collapse">
+      <ul id="navbar-main-elements" class="navbar-nav mr-auto">
+        
+        
+        <li class="nav-item active">
+            <a class="nav-link" href="../index.html">API reference</a>
+        </li>
+        
+        <li class="nav-item ">
+            <a class="nav-link" href="../../../tutorials.html">Tutorials</a>
+        </li>
+        
+        
+      </ul>
+
+
+      
+
+      <ul class="navbar-nav">
+        
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/secondmind-labs/trieste" target="_blank" rel="noopener">
+              <span><i class="fab fa-github-square"></i></span>
+            </a>
+          </li>
+        
+        
+      </ul>
+    </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+          <div class="col-12 col-md-3 bd-sidebar">
+
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form>
+
+
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+
+  <div class="bd-toc-item active">
+  
+
+  <ul class="nav bd-sidenav">
+      
+      
+        
+          
+
+              <li class="active">
+                  <a href="">trieste.acquisition</a>
+                  <ul>
+                  
+                      <li class="">
+                          <a href="rule/index.html">trieste.acquisition.rule</a>
+                      </li>
+                  
+                  </ul>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../models/index.html">trieste.models</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../utils/index.html">trieste.utils</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../bayesian_optimizer/index.html">trieste.bayesian_optimizer</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../datasets/index.html">trieste.datasets</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../observer/index.html">trieste.observer</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../space/index.html">trieste.space</a>
+              </li>
+          
+        
+          
+              <li class="">
+                  <a href="../type/index.html">trieste.type</a>
+              </li>
+          
+        
+      
+      
+      
+      
+    </ul>
+
+</nav>
+          </div>
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+              
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="nav section-nav flex-column">
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#submodules" class="nav-link">Submodules</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h2">
+            <a href="#package-contents" class="nav-link">Package Contents</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.AcquisitionFunction" class="nav-link">AcquisitionFunction</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.AcquisitionFunctionBuilder" class="nav-link">AcquisitionFunctionBuilder</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.AcquisitionFunctionBuilder.prepare_acquisition_function" class="nav-link">prepare_acquisition_function</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.SingleModelAcquisitionBuilder" class="nav-link">SingleModelAcquisitionBuilder</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.SingleModelAcquisitionBuilder.using" class="nav-link">using</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.SingleModelAcquisitionBuilder.prepare_acquisition_function" class="nav-link">prepare_acquisition_function</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.ExpectedImprovement" class="nav-link">ExpectedImprovement</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.ExpectedImprovement.prepare_acquisition_function" class="nav-link">prepare_acquisition_function</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.expected_improvement" class="nav-link">expected_improvement</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.NegativeLowerConfidenceBound" class="nav-link">NegativeLowerConfidenceBound</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.NegativeLowerConfidenceBound.prepare_acquisition_function" class="nav-link">prepare_acquisition_function</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.NegativePredictiveMean" class="nav-link">NegativePredictiveMean</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.lower_confidence_bound" class="nav-link">lower_confidence_bound</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.ProbabilityOfFeasibility" class="nav-link">ProbabilityOfFeasibility</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.ProbabilityOfFeasibility.threshold" class="nav-link">threshold</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.ProbabilityOfFeasibility.prepare_acquisition_function" class="nav-link">prepare_acquisition_function</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.probability_of_feasibility" class="nav-link">probability_of_feasibility</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.Reducer" class="nav-link">Reducer</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.Reducer.prepare_acquisition_function" class="nav-link">prepare_acquisition_function</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.Reducer.acquisitions" class="nav-link">acquisitions</a>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.Reducer._reduce" class="nav-link">_reduce</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.Product" class="nav-link">Product</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.Product._reduce" class="nav-link">_reduce</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+        <li class="nav-item toc-entry toc-h3">
+            <a href="#trieste.acquisition.Sum" class="nav-link">Sum</a><ul class="nav section-nav flex-column">
+                
+        <li class="nav-item toc-entry toc-h4">
+            <a href="#trieste.acquisition.Sum._reduce" class="nav-link">_reduce</a>
+        </li>
+    
+            </ul>
+        </li>
+    
+            </ul>
+        </li>
+    
+    </ul>
+</nav>
+
+
+              
+          </div>
+          
+
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <div class="section" id="module-trieste.acquisition">
+<span id="trieste-acquisition"></span><h1><a class="reference internal" href="#module-trieste.acquisition" title="trieste.acquisition"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trieste.acquisition</span></code></a><a class="headerlink" href="#module-trieste.acquisition" title="Permalink to this headline">¶</a></h1>
+<p>The acquisition process aims to find the optimal point(s) at which to next evaluate the objective
+function, with the aim of minimising it. The functionality in this package implements that process.
+It typically uses the current observations of the objective function, or a posterior over those
+observations.</p>
+<p>In this library, the acquisition rule is the central object of the API, while acquisition functions
+are supplementary. This is because some acquisition rules, such as Thompson sampling,
+do not require an acquisition function. This contrasts with other libraries which may consider
+the acquisition function as the central component of this process and assume Efficient Global
+Optimization (EGO) for the acquisition rule.</p>
+<p>This package contains acquisition rules, as implementations of
+<a class="reference internal" href="rule/index.html#trieste.acquisition.rule.AcquisitionRule" title="trieste.acquisition.rule.AcquisitionRule"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionRule</span></code></a>, and acquisition functions. It also contains
+<code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionBuilder</span></code>s which provide a common interface for the rules to build acquisition
+functions.</p>
+<p>Acquisition rules in this library that use acquisition functions, such as
+<code class="xref py py-class docutils literal notranslate"><span class="pre">EfficientGlobalOptimization</span></code>, <em>maximize</em> these functions. This defines the sign the
+acquisition function should take. Additionally, acquisition functions and builders in this library
+are designed to minimize the objective function. For example, we do not provide an implementation of
+UCB.</p>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rule/index.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trieste.acquisition.rule</span></code></a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Permalink to this headline">¶</a></h2>
+<dl class="py data">
+<dt id="trieste.acquisition.AcquisitionFunction">
+<code class="sig-name descname">AcquisitionFunction</code><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#AcquisitionFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.AcquisitionFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type alias for acquisition functions.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.AcquisitionFunctionBuilder">
+<em class="property">class </em><code class="sig-name descname">AcquisitionFunctionBuilder</code><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#AcquisitionFunctionBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>An <a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunctionBuilder</span></code></a> builds an acquisition function.</p>
+<dl class="py method">
+<dt id="trieste.acquisition.AcquisitionFunctionBuilder.prepare_acquisition_function">
+<em class="property">abstract </em><code class="sig-name descname">prepare_acquisition_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span>Dataset<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">models</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span>ModelInterface<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction">AcquisitionFunction</a><a class="headerlink" href="#trieste.acquisition.AcquisitionFunctionBuilder.prepare_acquisition_function" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datasets</strong> – The data from the observer.</p></li>
+<li><p><strong>models</strong> – The models over each dataset in <code class="docutils literal notranslate"><span class="pre">datasets</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An acquisition function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.SingleModelAcquisitionBuilder">
+<em class="property">class </em><code class="sig-name descname">SingleModelAcquisitionBuilder</code><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#SingleModelAcquisitionBuilder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.SingleModelAcquisitionBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Convenience acquisition function builder for an acquisition function (or component of a
+composite acquisition function) that requires only one model, dataset pair.</p>
+<dl class="py method">
+<dt id="trieste.acquisition.SingleModelAcquisitionBuilder.using">
+<code class="sig-name descname">using</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">tag</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder">AcquisitionFunctionBuilder</a><a class="headerlink" href="#trieste.acquisition.SingleModelAcquisitionBuilder.using" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>tag</strong> – The tag for the model, dataset pair to use to build this acquisition function.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An acquisition function builder that selects the model and dataset specified by
+<code class="docutils literal notranslate"><span class="pre">tag</span></code>, as defined in <a class="reference internal" href="#trieste.acquisition.SingleModelAcquisitionBuilder.prepare_acquisition_function" title="trieste.acquisition.SingleModelAcquisitionBuilder.prepare_acquisition_function"><code class="xref py py-meth docutils literal notranslate"><span class="pre">prepare_acquisition_function()</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.acquisition.SingleModelAcquisitionBuilder.prepare_acquisition_function">
+<em class="property">abstract </em><code class="sig-name descname">prepare_acquisition_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction">AcquisitionFunction</a><a class="headerlink" href="#trieste.acquisition.SingleModelAcquisitionBuilder.prepare_acquisition_function" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – The data to use to build the acquisition function.</p></li>
+<li><p><strong>model</strong> – The model over the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An acquisition function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.ExpectedImprovement">
+<em class="property">class </em><code class="sig-name descname">ExpectedImprovement</code><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#ExpectedImprovement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.ExpectedImprovement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="function/index.html#trieste.acquisition.function.SingleModelAcquisitionBuilder" title="trieste.acquisition.function.SingleModelAcquisitionBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.function.SingleModelAcquisitionBuilder</span></code></a></p>
+<p>Builder for the expected improvement function where the “best” value is taken to be the minimum
+of the posterior mean at observed points.</p>
+<dl class="py method">
+<dt id="trieste.acquisition.ExpectedImprovement.prepare_acquisition_function">
+<code class="sig-name descname">prepare_acquisition_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction">AcquisitionFunction</a><a class="headerlink" href="#trieste.acquisition.ExpectedImprovement.prepare_acquisition_function" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – Unused.</p></li>
+<li><p><strong>model</strong> – The model over the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The expected improvement function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="trieste.acquisition.expected_improvement">
+<code class="sig-name descname">expected_improvement</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em>, <em class="sig-param"><span class="n">eta</span><span class="p">:</span> <span class="n">tf.Tensor</span></em>, <em class="sig-param"><span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#expected_improvement"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.expected_improvement" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Expected Improvement (EI) acquisition function for single-objective global optimization.
+Return the expectation of the improvement at <code class="docutils literal notranslate"><span class="pre">at</span></code> over the current “best” observation <code class="docutils literal notranslate"><span class="pre">eta</span></code>,
+where an improvement moves towards the objective function’s minimum, and the expectation is
+calculated with respect to the <code class="docutils literal notranslate"><span class="pre">model</span></code> posterior. For model posterior <span class="math notranslate nohighlight">\(f\)</span>, this is</p>
+<div class="math notranslate nohighlight">
+\[x \mapsto \mathbb E \left[ \max (\eta - f(x), 0) \right]\]</div>
+<p>This function was introduced by Mockus et al, 1975. See the following for details:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@article</span><span class="p">{</span><span class="n">Jones</span><span class="p">:</span><span class="mi">1998</span><span class="p">,</span>
+     <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">Efficient</span> <span class="k">global</span> <span class="n">optimization</span> <span class="n">of</span> <span class="n">expensive</span> <span class="n">black</span><span class="o">-</span><span class="n">box</span> <span class="n">functions</span><span class="p">},</span>
+     <span class="n">author</span><span class="o">=</span><span class="p">{</span><span class="n">Jones</span><span class="p">,</span> <span class="n">Donald</span> <span class="n">R</span> <span class="ow">and</span> <span class="n">Schonlau</span><span class="p">,</span> <span class="n">Matthias</span> <span class="ow">and</span> <span class="n">Welch</span><span class="p">,</span> <span class="n">William</span> <span class="n">J</span><span class="p">},</span>
+     <span class="n">journal</span><span class="o">=</span><span class="p">{</span><span class="n">Journal</span> <span class="n">of</span> <span class="n">Global</span> <span class="n">optimization</span><span class="p">},</span>
+     <span class="n">volume</span><span class="o">=</span><span class="p">{</span><span class="mi">13</span><span class="p">},</span>
+     <span class="n">number</span><span class="o">=</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span>
+     <span class="n">pages</span><span class="o">=</span><span class="p">{</span><span class="mi">455</span><span class="o">--</span><span class="mi">492</span><span class="p">},</span>
+     <span class="n">year</span><span class="o">=</span><span class="p">{</span><span class="mi">1998</span><span class="p">},</span>
+     <span class="n">publisher</span><span class="o">=</span><span class="p">{</span><span class="n">Springer</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model of the objective function.</p></li>
+<li><p><strong>eta</strong> – The “best” observation.</p></li>
+<li><p><strong>at</strong> – The points for which to calculate the expected improvement.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The expected improvement at <code class="docutils literal notranslate"><span class="pre">at</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.NegativeLowerConfidenceBound">
+<em class="property">class </em><code class="sig-name descname">NegativeLowerConfidenceBound</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">beta</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span> <span class="o">=</span> <span class="default_value">1.96</span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#NegativeLowerConfidenceBound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.NegativeLowerConfidenceBound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="function/index.html#trieste.acquisition.function.SingleModelAcquisitionBuilder" title="trieste.acquisition.function.SingleModelAcquisitionBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.function.SingleModelAcquisitionBuilder</span></code></a></p>
+<p>Builder for the negative of the lower confidence bound. The lower confidence bound is typically
+minimised, so the negative is suitable for maximisation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>beta</strong> – Weighting given to the variance contribution to the lower confidence bound.
+Must not be negative.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.acquisition.NegativeLowerConfidenceBound.prepare_acquisition_function">
+<code class="sig-name descname">prepare_acquisition_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction">AcquisitionFunction</a><a class="headerlink" href="#trieste.acquisition.NegativeLowerConfidenceBound.prepare_acquisition_function" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – Unused.</p></li>
+<li><p><strong>model</strong> – The model over the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The negative of the lower confidence bound function. This function will raise
+<cite>ValueError</cite> if <code class="docutils literal notranslate"><span class="pre">beta</span></code> is negative.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.NegativePredictiveMean">
+<em class="property">class </em><code class="sig-name descname">NegativePredictiveMean</code><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#NegativePredictiveMean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.NegativePredictiveMean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="function/index.html#trieste.acquisition.function.NegativeLowerConfidenceBound" title="trieste.acquisition.function.NegativeLowerConfidenceBound"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.function.NegativeLowerConfidenceBound</span></code></a></p>
+<p>Builder for the negative of the predictive mean. The predictive mean is minimised on minimising
+the objective function. The negative predictive mean is therefore maximised.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>beta</strong> – Weighting given to the variance contribution to the lower confidence bound.
+Must not be negative.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="trieste.acquisition.lower_confidence_bound">
+<code class="sig-name descname">lower_confidence_bound</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em>, <em class="sig-param"><span class="n">beta</span><span class="p">:</span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a></span></em>, <em class="sig-param"><span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#lower_confidence_bound"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.lower_confidence_bound" title="Permalink to this definition">¶</a></dt>
+<dd><p>The lower confidence bound (LCB) acquisition function for single-objective global optimization.</p>
+<div class="math notranslate nohighlight">
+\[x^* \mapsto \mathbb{E} [f(x^*)|x, y] - \beta \sqrt{ \mathrm{Var}[f(x^*)|x, y] }\]</div>
+<p>See the following for details:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="n">Srinivas</span><span class="p">:</span><span class="mi">2010</span><span class="p">,</span>
+    <span class="n">author</span> <span class="o">=</span> <span class="s2">&quot;Srinivas, Niranjan and Krause, Andreas and Seeger, Matthias and Kakade, Sham M.&quot;</span><span class="p">,</span>
+    <span class="n">booktitle</span> <span class="o">=</span> <span class="s2">&quot;{Proceedings of the 27th International Conference on Machine Learning (ICML-10)}&quot;</span><span class="p">,</span>
+    <span class="n">editor</span> <span class="o">=</span> <span class="s2">&quot;F{</span><span class="se">\&quot;</span><span class="s2">u}rnkranz, Johannes and Joachims, Thorsten&quot;</span><span class="p">,</span>
+    <span class="n">pages</span> <span class="o">=</span> <span class="s2">&quot;1015--1022&quot;</span><span class="p">,</span>
+    <span class="n">publisher</span> <span class="o">=</span> <span class="s2">&quot;Omnipress&quot;</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;{Gaussian Process Optimization in the Bandit Setting: No Regret and Experimental Design}&quot;</span><span class="p">,</span>
+    <span class="n">year</span> <span class="o">=</span> <span class="s2">&quot;2010&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model of the objective function.</p></li>
+<li><p><strong>beta</strong> – The weight to give to the standard deviation contribution of the LCB. Must not be
+negative.</p></li>
+<li><p><strong>at</strong> – The points at which to evaluate the LCB.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The lower confidence bound at <code class="docutils literal notranslate"><span class="pre">at</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">beta</span></code> is negative.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.ProbabilityOfFeasibility">
+<em class="property">class </em><code class="sig-name descname">ProbabilityOfFeasibility</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">threshold</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">, </span>tf.Tensor<span class="p">]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#ProbabilityOfFeasibility"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.ProbabilityOfFeasibility" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="function/index.html#trieste.acquisition.function.SingleModelAcquisitionBuilder" title="trieste.acquisition.function.SingleModelAcquisitionBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.function.SingleModelAcquisitionBuilder</span></code></a></p>
+<p>Builder for the <a class="reference internal" href="#trieste.acquisition.probability_of_feasibility" title="trieste.acquisition.probability_of_feasibility"><code class="xref py py-func docutils literal notranslate"><span class="pre">probability_of_feasibility()</span></code></a> acquisition function, defined in
+Garner, 2014 as</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\tau} p(c(\mathbf{x}) | \mathbf{x}, \mathcal{D}) \mathrm{d} c(\mathbf{x}) \qquad ,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is a threshold. Values below the threshold are considered feasible by the
+constraint function. See the following for details:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@inproceedings</span><span class="p">{</span><span class="n">gardner14</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">Bayesian</span> <span class="n">Optimization</span> <span class="k">with</span> <span class="n">Inequality</span> <span class="n">Constraints</span><span class="p">},</span>
+    <span class="n">author</span><span class="o">=</span><span class="p">{</span><span class="n">Jacob</span> <span class="n">Gardner</span> <span class="ow">and</span> <span class="n">Matt</span> <span class="n">Kusner</span> <span class="ow">and</span> <span class="n">Zhixiang</span> <span class="ow">and</span> <span class="n">Kilian</span> <span class="n">Weinberger</span> <span class="ow">and</span> <span class="n">John</span> <span class="n">Cunningham</span><span class="p">},</span>
+    <span class="n">booktitle</span><span class="o">=</span><span class="p">{</span><span class="n">Proceedings</span> <span class="n">of</span> <span class="n">the</span> <span class="mi">31</span><span class="n">st</span> <span class="n">International</span> <span class="n">Conference</span> <span class="n">on</span> <span class="n">Machine</span> <span class="n">Learning</span><span class="p">},</span>
+    <span class="n">year</span><span class="o">=</span><span class="p">{</span><span class="mi">2014</span><span class="p">},</span>
+    <span class="n">volume</span><span class="o">=</span><span class="p">{</span><span class="mi">32</span><span class="p">},</span>
+    <span class="n">number</span><span class="o">=</span><span class="p">{</span><span class="mi">2</span><span class="p">},</span>
+    <span class="n">series</span><span class="o">=</span><span class="p">{</span><span class="n">Proceedings</span> <span class="n">of</span> <span class="n">Machine</span> <span class="n">Learning</span> <span class="n">Research</span><span class="p">},</span>
+    <span class="n">month</span><span class="o">=</span><span class="p">{</span><span class="mi">22</span><span class="o">--</span><span class="mi">24</span> <span class="n">Jun</span><span class="p">},</span>
+    <span class="n">publisher</span><span class="o">=</span><span class="p">{</span><span class="n">PMLR</span><span class="p">},</span>
+    <span class="n">url</span><span class="o">=</span><span class="p">{</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">proceedings</span><span class="o">.</span><span class="n">mlr</span><span class="o">.</span><span class="n">press</span><span class="o">/</span><span class="n">v32</span><span class="o">/</span><span class="n">gardner14</span><span class="o">.</span><span class="n">html</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="nd">@article</span><span class="p">{</span><span class="n">schonlau1998global</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="n">Global</span> <span class="n">versus</span> <span class="n">local</span> <span class="n">search</span> <span class="ow">in</span> <span class="n">constrained</span> <span class="n">optimization</span> <span class="n">of</span> <span class="n">computer</span> <span class="n">models</span><span class="p">},</span>
+    <span class="n">author</span><span class="o">=</span><span class="p">{</span><span class="n">Schonlau</span><span class="p">,</span> <span class="n">Matthias</span> <span class="ow">and</span> <span class="n">Welch</span><span class="p">,</span> <span class="n">William</span> <span class="n">J</span> <span class="ow">and</span> <span class="n">Jones</span><span class="p">,</span> <span class="n">Donald</span> <span class="n">R</span><span class="p">},</span>
+    <span class="n">journal</span><span class="o">=</span><span class="p">{</span><span class="n">Lecture</span> <span class="n">Notes</span><span class="o">-</span><span class="n">Monograph</span> <span class="n">Series</span><span class="p">},</span>
+    <span class="n">pages</span><span class="o">=</span><span class="p">{</span><span class="mi">11</span><span class="o">--</span><span class="mi">25</span><span class="p">},</span>
+    <span class="n">year</span><span class="o">=</span><span class="p">{</span><span class="mi">1998</span><span class="p">},</span>
+    <span class="n">publisher</span><span class="o">=</span><span class="p">{</span><span class="n">JSTOR</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>threshold</strong> – The (scalar) probability of feasibility threshold.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a><strong> (or </strong><strong>InvalidArgumentError</strong><strong>)</strong> – If <code class="docutils literal notranslate"><span class="pre">threshold</span></code> is not a scalar.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.acquisition.ProbabilityOfFeasibility.threshold">
+<em class="property">property </em><code class="sig-name descname">threshold</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">, </span>tf.Tensor<span class="p">]</span><a class="headerlink" href="#trieste.acquisition.ProbabilityOfFeasibility.threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>The probability of feasibility threshold.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.acquisition.ProbabilityOfFeasibility.prepare_acquisition_function">
+<code class="sig-name descname">prepare_acquisition_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span></em>, <em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction">AcquisitionFunction</a><a class="headerlink" href="#trieste.acquisition.ProbabilityOfFeasibility.prepare_acquisition_function" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> – Unused.</p></li>
+<li><p><strong>model</strong> – The model over the specified <code class="docutils literal notranslate"><span class="pre">dataset</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The probability of feasibility acquisition function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="trieste.acquisition.probability_of_feasibility">
+<code class="sig-name descname">probability_of_feasibility</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">model</span><span class="p">:</span> <span class="n">ModelInterface</span></em>, <em class="sig-param"><span class="n">threshold</span><span class="p">:</span> <span class="n">Union<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)">float</a><span class="p">, </span>tf.Tensor<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">at</span><span class="p">:</span> <span class="n">QueryPoints</span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="reference internal" href="../../../_modules/trieste/acquisition/function.html#probability_of_feasibility"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.probability_of_feasibility" title="Permalink to this definition">¶</a></dt>
+<dd><p>The probability of feasibility acquisition function defined in Garner, 2014 as</p>
+<div class="math notranslate nohighlight">
+\[\int_{-\infty}^{\tau} p(c(\mathbf{x}) | \mathbf{x}, \mathcal{D}) \mathrm{d}c(\mathbf{x}) \qquad ,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is a threshold. Values below the threshold are considered feasible by the
+constraint function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> – The model of the objective function.</p></li>
+<li><p><strong>threshold</strong> – The (scalar) probability of feasibility threshold.</p></li>
+<li><p><strong>at</strong> – The points at which to evaluate the probability of feasibility. Must have rank at
+least two</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The probability of feasibility at <code class="docutils literal notranslate"><span class="pre">at</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a><strong> (or </strong><strong>InvalidArgumentError</strong><strong>)</strong> – If arguments have the incorrect shape.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.Reducer">
+<em class="property">class </em><code class="sig-name descname">Reducer</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">builders</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder">AcquisitionFunctionBuilder</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trieste/acquisition/combination.html#Reducer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.Reducer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="function/index.html#trieste.acquisition.function.AcquisitionFunctionBuilder" title="trieste.acquisition.function.AcquisitionFunctionBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.function.AcquisitionFunctionBuilder</span></code></a></p>
+<p>A <a class="reference internal" href="#trieste.acquisition.Reducer" title="trieste.acquisition.Reducer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reducer</span></code></a> builds an <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction"><code class="xref py py-func docutils literal notranslate"><span class="pre">AcquisitionFunction()</span></code></a> whose output is
+calculated from the outputs of a number of other
+<a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction"><code class="xref py py-func docutils literal notranslate"><span class="pre">AcquisitionFunction()</span></code></a>s. How these outputs are composed is
+defined by the method <a class="reference internal" href="#trieste.acquisition.Reducer._reduce" title="trieste.acquisition.Reducer._reduce"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_reduce()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*builders</strong> – Acquisition function builders. At least one must be provided.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If no builders are specified.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.acquisition.Reducer.prepare_acquisition_function">
+<code class="sig-name descname">prepare_acquisition_function</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">datasets</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span>Dataset<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">models</span><span class="p">:</span> <span class="n">Mapping<span class="p">[</span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)">str</a><span class="p">, </span>ModelInterface<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#trieste.acquisition.AcquisitionFunction" title="trieste.acquisition.AcquisitionFunction">AcquisitionFunction</a><a class="headerlink" href="#trieste.acquisition.Reducer.prepare_acquisition_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return an acquisition function. This acquisition function is defined by first building
+acquisition functions from each of the
+<a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">AcquisitionFunctionBuilder</span></code></a>s specified at
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code>, then reducing, with <a class="reference internal" href="#trieste.acquisition.Reducer._reduce" title="trieste.acquisition.Reducer._reduce"><code class="xref py py-meth docutils literal notranslate"><span class="pre">_reduce()</span></code></a>, the output of each of those
+acquisition functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datasets</strong> – The data from the observer.</p></li>
+<li><p><strong>models</strong> – The models over each dataset in <code class="docutils literal notranslate"><span class="pre">datasets</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The reduced acquisition function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.acquisition.Reducer.acquisitions">
+<em class="property">property </em><code class="sig-name descname">acquisitions</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span> &#x2192; Sequence<span class="p">[</span><a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder">AcquisitionFunctionBuilder</a><span class="p">]</span><a class="headerlink" href="#trieste.acquisition.Reducer.acquisitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>The acquisition function builders specified at class initialisation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="trieste.acquisition.Reducer._reduce">
+<em class="property">abstract </em><code class="sig-name descname">_reduce</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence<span class="p">[</span>tf.Tensor<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="headerlink" href="#trieste.acquisition.Reducer._reduce" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> – The output of each constituent acquisition function.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The output of the reduced acquisition function.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.Product">
+<em class="property">class </em><code class="sig-name descname">Product</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">builders</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder">AcquisitionFunctionBuilder</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trieste/acquisition/combination.html#Product"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.Product" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="combination/index.html#trieste.acquisition.combination.Reducer" title="trieste.acquisition.combination.Reducer"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.combination.Reducer</span></code></a></p>
+<p><a class="reference internal" href="#trieste.acquisition.Reducer" title="trieste.acquisition.Reducer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reducer</span></code></a> whose resulting acquisition function returns the element-wise product of the
+outputs of constituent acquisition functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*builders</strong> – Acquisition function builders. At least one must be provided.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If no builders are specified.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.acquisition.Product._reduce">
+<code class="sig-name descname">_reduce</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence<span class="p">[</span>tf.Tensor<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="headerlink" href="#trieste.acquisition.Product._reduce" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> – The outputs of each acquisition function.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The element-wise product of the <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="trieste.acquisition.Sum">
+<em class="property">class </em><code class="sig-name descname">Sum</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">builders</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#trieste.acquisition.AcquisitionFunctionBuilder" title="trieste.acquisition.AcquisitionFunctionBuilder">AcquisitionFunctionBuilder</a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../_modules/trieste/acquisition/combination.html#Sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#trieste.acquisition.Sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="combination/index.html#trieste.acquisition.combination.Reducer" title="trieste.acquisition.combination.Reducer"><code class="xref py py-class docutils literal notranslate"><span class="pre">trieste.acquisition.combination.Reducer</span></code></a></p>
+<p><a class="reference internal" href="#trieste.acquisition.Reducer" title="trieste.acquisition.Reducer"><code class="xref py py-class docutils literal notranslate"><span class="pre">Reducer</span></code></a> whose resulting acquisition function returns the element-wise sum of the
+outputs of constituent acquisition functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*builders</strong> – Acquisition function builders. At least one must be provided.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If no builders are specified.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="trieste.acquisition.Sum._reduce">
+<code class="sig-name descname">_reduce</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">inputs</span><span class="p">:</span> <span class="n">Sequence<span class="p">[</span>tf.Tensor<span class="p">]</span></span></em><span class="sig-paren">)</span> &#x2192; tf.Tensor<a class="headerlink" href="#trieste.acquisition.Sum._reduce" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>inputs</strong> – The outputs of each acquisition function.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The element-wise sum of the <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+              
+          </main>
+          
+
+      </div>
+    </div>
+
+    
+  <script src="../../../_static/js/index.30270b6e4c972e43c488.js"></script>
+
+
+    <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    <p>
+          &copy; Copyright Copyright 2020 The Trieste Contributors
+
+Licensed under the Apache License, Version 2.0 (the &#34;License&#34;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &#34;AS IS&#34; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.&#34;
+.<br/>
+        Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br/>
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
