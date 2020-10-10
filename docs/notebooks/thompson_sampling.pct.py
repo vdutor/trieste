@@ -24,7 +24,6 @@ import tensorflow as tf
 import gpflow
 
 import trieste
-from trieste.bayesian_optimizer import SingleModelOptimizer
 from trieste.utils.objectives import branin
 
 from util.plotting_plotly import plot_gp_plotly, add_bo_points_plotly
@@ -90,8 +89,9 @@ acq_rule = trieste.acquisition.rule.ThompsonSampling(
 # every step in the loop. With five steps, that's fifty points.
 
 # %%
-bo: SingleModelOptimizer = trieste.bayesian_optimizer.SingleModelOptimizer(branin, search_space)
-result, _ = bo.optimize(5, initial_data, model_config, acq_rule)
+result, _ = trieste.bayesian_optimizer.BayesianOptimizer(branin, search_space).optimize(
+    5, initial_data, model_config, acq_rule
+)
 
 if result.error is not None: raise result.error
 

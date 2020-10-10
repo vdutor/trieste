@@ -19,12 +19,12 @@ import pytest
 import tensorflow as tf
 
 from trieste.acquisition.rule import (
-    SingleModelAcquisitionRule,
+    AcquisitionRule,
     EfficientGlobalOptimization,
     ThompsonSampling,
     TrustRegion,
 )
-from trieste.bayesian_optimizer import SingleModelOptimizer
+from trieste.bayesian_optimizer import BayesianOptimizer
 from trieste.datasets import Dataset
 from trieste.models import GaussianProcessRegression
 from trieste.space import Box
@@ -40,7 +40,7 @@ from tests.util.misc import random_seed
     (17, ThompsonSampling(500, 3)),
 ])
 def test_optimizer_finds_minima_of_the_branin_function(
-        num_steps: int, acquisition_rule: SingleModelAcquisitionRule
+        num_steps: int, acquisition_rule: AcquisitionRule
 ) -> None:
     search_space = Box(tf.constant([0.0, 0.0], tf.float64), tf.constant([1.0, 1.0], tf.float64))
 
@@ -55,7 +55,7 @@ def test_optimizer_finds_minima_of_the_branin_function(
     initial_data = Dataset(initial_qp, branin(initial_qp))
     model = build_model(initial_data)
 
-    res, _ = SingleModelOptimizer(
+    res, _ = BayesianOptimizer(
         branin, search_space
     ).optimize(
         num_steps, initial_data, model, acquisition_rule

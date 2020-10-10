@@ -27,8 +27,8 @@ import tensorflow as tf
 
 from .acquisition.rule import (
     AcquisitionRule,
+    SerialAcquisitionRule,
     EfficientGlobalOptimization,
-    SingleModelAcquisitionRule,
 )
 from .datasets import Dataset
 from .models import ModelInterface, create_model_interface, ModelSpec
@@ -42,23 +42,22 @@ SP = TypeVar("SP", bound=SearchSpace)
 """ Type variable bound to :class:`SearchSpace`. """
 
 
-@dataclass(frozen=True)
-class LoggingState(Generic[S]):
-    """
-    Container used to track the state of the optimization process in :class:`BayesianOptimizer`.
-    """
-
-    datasets: Mapping[str, Dataset]
-    models: Mapping[str, ModelInterface]
-    acquisition_state: Optional[S]
-
-
-class BayesianOptimizer(Generic[SP]):
+class SerialBayesianOptimizer(Generic[SP]):
     """
     This class performs Bayesian optimization, the data efficient optimization of an expensive
     black-box *objective function* over some *search space*. Since we may not have access to the
     objective function itself, we speak instead of an *observer* that observes it.
     """
+    @dataclass(frozen=True)
+    class LoggingState(Generic[S]):
+        """
+        Container used to track the state of the optimization process in :class:`BayesianOptimizer`.
+        """
+
+        datasets: Mapping[str, Dataset]
+        models: Mapping[str, ModelInterface]
+        acquisition_state: Optional[S]
+
     @dataclass(frozen=True)
     class Result(Generic[S]):
         """ Container for the result of the optimization process in :class:`BayesianOptimizer`. """
@@ -84,7 +83,7 @@ class BayesianOptimizer(Generic[SP]):
         # asked at the time
         datasets: Mapping[str, Dataset],
         model_specs: Mapping[str, ModelSpec],
-        acquisition_rule: AcquisitionRule[S, SP],
+        acquisition_rule: SerialAcquisitionRule[S, SP],
         acquisition_state: Optional[S] = None,
         track_state: bool = True,
     ) -> Tuple[Result[S], List[LoggingState[S]]]:
@@ -147,12 +146,14 @@ class BayesianOptimizer(Generic[SP]):
             raise ValueError("dicts of datasets and model_specs must be populated.")
 
         models = {tag: create_model_interface(spec) for tag, spec in model_specs.items()}
-        history: List[LoggingState[S]] = []
+        history: List[SerialBayesianOptimizer.LoggingState[S]] = []
 
         for step in range(num_steps):
             try:
                 if track_state:
-                    _save_to_history(history, datasets, models, acquisition_state)
+                    history.append(self.LoggingState(
+                        datasets, gpflow.utilities.deepcopy(models), copy.deepcopy(acquisition_state)
+                    ))
 
                 query_points, acquisition_state = acquisition_rule.acquire(
                     self.search_space, datasets, models, acquisition_state
@@ -173,7 +174,13 @@ class BayesianOptimizer(Generic[SP]):
         return self.Result(datasets, models, None), history
 
 
-class SingleModelOptimizer(Generic[S, SP]):
+class BayesianOptimizer(Generic[SP]):
+    @dataclass(frozen=True)
+    class LoggingState(Generic[S]):
+        dataset: Dataset
+        model: ModelInterface
+        acquisition_state: Optional[S]
+
     @dataclass(frozen=True)
     class Result:
         dataset: Dataset
@@ -189,21 +196,29 @@ class SingleModelOptimizer(Generic[S, SP]):
         num_steps: int,
         dataset: Dataset,
         model_spec: ModelSpec,
-        acquisition_rule: Optional[SingleModelAcquisitionRule[S, SP]] = None,
+        acquisition_rule: Optional[AcquisitionRule[S, SP]] = None,
         acquisition_state: Optional[S] = None,
         track_state: bool = True,
-    ) -> Tuple[Result, List[...]]:
+    ) -> Tuple[Result, List[LoggingState[S]]]:
         if acquisition_rule is None:
-            acquisition_rule = EfficientGlobalOptimization()
+            if acquisition_state is not None:
+                raise TypeError
+
+            rule = cast(AcquisitionRule[S, SP], EfficientGlobalOptimization())
+        else:
+            rule = acquisition_rule
 
         model = create_model_interface(model_spec)
-        history: List[LoggingState[S]] = []
+        history: List[BayesianOptimizer.LoggingState[S]] = []
 
         for step in range(num_steps):
             try:
-                # todo history
+                if track_state:
+                    history.append(self.LoggingState(
+                        dataset, gpflow.utilities.deepcopy(model), copy.deepcopy(acquisition_state)
+                    ))
 
-                query_points, acquisition_state = acquisition_rule.acquire(
+                query_points, acquisition_state = rule.acquire(
                     self._search_space, dataset, model, acquisition_state
                 )
 
@@ -225,15 +240,3 @@ def _log_failure(step: int) -> None:
         f"\nAborting process and returning results",
         output_stream=logging.ERROR,
     )
-
-
-def _save_to_history(
-    history: List[LoggingState[S]],
-    datasets: Mapping[str, Dataset],
-    models: Mapping[str, ModelInterface],
-    acquisition_state: Optional[S],
-) -> None:
-    models_copy = {tag: gpflow.utilities.deepcopy(m) for tag, m in models.items()}
-    datasets_copy = {tag: ds for tag, ds in datasets.items()}
-    logging_state = LoggingState(datasets_copy, models_copy, copy.deepcopy(acquisition_state))
-    history.append(logging_state)

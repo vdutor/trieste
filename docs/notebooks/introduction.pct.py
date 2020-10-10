@@ -18,6 +18,7 @@
 
 # %%
 from dataclasses import astuple
+from typing import List
 
 import gpflow
 from gpflow.utilities import print_summary, set_trainable
@@ -25,7 +26,7 @@ import numpy as np
 import tensorflow as tf
 
 import trieste
-from trieste.bayesian_optimizer import SingleModelOptimizer
+from trieste.bayesian_optimizer import BayesianOptimizer
 from trieste.utils.objectives import branin
 
 from util.plotting_plotly import plot_function_plotly, plot_gp_plotly, add_bo_points_plotly
@@ -119,8 +120,9 @@ model = trieste.models.create_model_interface({
 # such errors. You may wish instead to use the history to restore the process from an earlier point.
 
 # %%
-bo: SingleModelOptimizer = trieste.bayesian_optimizer.SingleModelOptimizer(branin, search_space)
+bo: BayesianOptimizer = trieste.bayesian_optimizer.BayesianOptimizer(branin, search_space)
 
+history: List[BayesianOptimizer.LoggingState[None]]
 result, history = bo.optimize(15, initial_data, model)
 
 if result.error is not None: raise result.error

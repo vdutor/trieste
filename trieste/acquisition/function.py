@@ -25,7 +25,7 @@ AcquisitionFunction = Callable[[QueryPoints], tf.Tensor]
 """ Type alias for acquisition functions. """
 
 
-class AcquisitionFunctionBuilder(ABC):
+class SerialAcquisitionFunctionBuilder(ABC):
     """ An :class:`AcquisitionFunctionBuilder` builds an acquisition function. """
 
     @abstractmethod
@@ -39,12 +39,12 @@ class AcquisitionFunctionBuilder(ABC):
         """
 
 
-class SingleModelAcquisitionBuilder(ABC):
+class AcquisitionFunctionBuilder(ABC):
     """
     Convenience acquisition function builder for an acquisition function (or component of a
     composite acquisition function) that requires only one model, dataset pair.
     """
-    def using(self, tag: str) -> AcquisitionFunctionBuilder:
+    def using(self, tag: str) -> SerialAcquisitionFunctionBuilder:
         """
         :param tag: The tag for the model, dataset pair to use to build this acquisition function.
         :return: An acquisition function builder that selects the model and dataset specified by
@@ -52,7 +52,7 @@ class SingleModelAcquisitionBuilder(ABC):
         """
         single_builder = self
 
-        class _Anon(AcquisitionFunctionBuilder):
+        class _Anon(SerialAcquisitionFunctionBuilder):
             def prepare_acquisition_function(
                 self, datasets: Mapping[str, Dataset], models: Mapping[str, ModelInterface]
             ) -> AcquisitionFunction:
@@ -74,7 +74,7 @@ class SingleModelAcquisitionBuilder(ABC):
         """
 
 
-class ExpectedImprovement(SingleModelAcquisitionBuilder):
+class ExpectedImprovement(AcquisitionFunctionBuilder):
     """
     Builder for the expected improvement function where the "best" value is taken to be the minimum
     of the posterior mean at observed points.
@@ -130,7 +130,7 @@ def expected_improvement(model: ModelInterface, eta: tf.Tensor, at: QueryPoints)
     return (eta - mean) * normal.cdf(eta) + variance * normal.prob(eta)
 
 
-class NegativeLowerConfidenceBound(SingleModelAcquisitionBuilder):
+class NegativeLowerConfidenceBound(AcquisitionFunctionBuilder):
     """
     Builder for the negative of the lower confidence bound. The lower confidence bound is typically
     minimised, so the negative is suitable for maximisation.
@@ -205,7 +205,7 @@ def lower_confidence_bound(model: ModelInterface, beta: float, at: QueryPoints) 
     return mean - beta * tf.sqrt(variance)
 
 
-class ProbabilityOfFeasibility(SingleModelAcquisitionBuilder):
+class ProbabilityOfFeasibility(AcquisitionFunctionBuilder):
     r"""
     Builder for the :func:`probability_of_feasibility` acquisition function, defined in
     Garner, 2014 as

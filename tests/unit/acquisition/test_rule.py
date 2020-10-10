@@ -16,7 +16,7 @@ import numpy.testing as npt
 import tensorflow as tf
 
 from trieste.acquisition.function import NegativeLowerConfidenceBound
-from trieste.acquisition.rule import Basic, TrustRegion
+from trieste.acquisition.rule import SerialBasic, TrustRegion
 from trieste.datasets import Dataset
 from trieste.space import SearchSpace, DiscreteSearchSpace, Box
 
@@ -31,7 +31,7 @@ from tests.util.model import QuadraticWithUnitVariance
     (Box(tf.constant([-2.2, -1.0]), tf.constant([1.3, 3.3])), tf.constant([[0.0, 0.0]])),
 ])
 def test_basic(search_space: SearchSpace, expected_minimum: tf.Tensor) -> None:
-    ego = Basic(NegativeLowerConfidenceBound(0).using("foo"))
+    ego = SerialBasic(NegativeLowerConfidenceBound(0).using("foo"))
     dataset = Dataset(tf.constant([[]]), tf.constant([[]]))
     query_point, _ = ego.acquire(
         search_space, {"foo": dataset}, {"foo": QuadraticWithUnitVariance()}

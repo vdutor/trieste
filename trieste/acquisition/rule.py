@@ -26,7 +26,11 @@ from ..datasets import Dataset
 from ..models import ModelInterface
 from ..space import SearchSpace, Box
 from ..type import QueryPoints
-from .function import AcquisitionFunctionBuilder, ExpectedImprovement, SingleModelAcquisitionBuilder
+from .function import (
+    AcquisitionFunctionBuilder,
+    ExpectedImprovement,
+    SerialAcquisitionFunctionBuilder,
+)
 from . import _optimizer
 
 
@@ -37,7 +41,7 @@ SP = TypeVar("SP", bound=SearchSpace, contravariant=True)
 """ Contravariant type variable bound to :class:`SearchSpace`. """
 
 
-class AcquisitionRule(ABC, Generic[S, SP]):
+class SerialAcquisitionRule(ABC, Generic[S, SP]):
     """ The central component of the acquisition API. """
 
     @abstractmethod
@@ -71,10 +75,10 @@ class AcquisitionRule(ABC, Generic[S, SP]):
         """
 
 
-class Basic(AcquisitionRule[None, SearchSpace]):
+class SerialBasic(SerialAcquisitionRule[None, SearchSpace]):
     """ Implements the Efficient Global Optimization, or EGO, algorithm. """
 
-    def __init__(self, builder: AcquisitionFunctionBuilder):
+    def __init__(self, builder: SerialAcquisitionFunctionBuilder):
         """
         :param builder: The acquisition function builder to use.
             :class:`EfficientGlobalOptimization` will attempt to **maximise** the corresponding
@@ -105,7 +109,7 @@ class Basic(AcquisitionRule[None, SearchSpace]):
         return point, None
 
 
-class SingleModelAcquisitionRule(ABC, Generic[S, SP]):
+class AcquisitionRule(ABC, Generic[S, SP]):
     @abstractmethod
     def acquire(
         self, search_space: SP, dataset: Dataset, model: ModelInterface, state: Optional[S]
@@ -113,14 +117,15 @@ class SingleModelAcquisitionRule(ABC, Generic[S, SP]):
         ...
 
 
-class SingleModelBasic(SingleModelAcquisitionRule[None, SearchSpace]):
-    def __init__(self, builder: SingleModelAcquisitionBuilder):
-        self._rule = Basic(builder.using(""))
+class SingleModelBasic(AcquisitionRule[None, SearchSpace]):
+    def __init__(self, builder: AcquisitionFunctionBuilder):
+        self._builder = builder
 
     def acquire(
         self, search_space: SP, dataset: Dataset, model: ModelInterface, state: None = None
     ) -> Tuple[QueryPoints, None]:
-        return self._rule.acquire(search_space, {"": dataset}, {"": model}, state)
+        acquisition_function = self._builder.prepare_acquisition_function(dataset, model)
+        return _optimizer.optimize(search_space, acquisition_function), None
 
 
 class EfficientGlobalOptimization(SingleModelBasic):
@@ -128,7 +133,7 @@ class EfficientGlobalOptimization(SingleModelBasic):
         super().__init__(ExpectedImprovement())
 
 
-class ThompsonSampling(SingleModelAcquisitionRule[None, SearchSpace]):
+class ThompsonSampling(AcquisitionRule[None, SearchSpace]):
     """ Implements Thompson sampling for choosing optimal points. """
 
     def __init__(self, num_search_space_samples: int, num_query_points: int):
@@ -175,7 +180,7 @@ class ThompsonSampling(SingleModelAcquisitionRule[None, SearchSpace]):
         return tf.gather(query_points, unique_indices), None
 
 
-class TrustRegion(SingleModelAcquisitionRule["TrustRegion.State", Box]):
+class TrustRegion(AcquisitionRule["TrustRegion.State", Box]):
     """ Implements the *trust region* acquisition algorithm. """
 
     @dataclass(frozen=True)
@@ -198,7 +203,7 @@ class TrustRegion(SingleModelAcquisitionRule["TrustRegion.State", Box]):
 
     def __init__(
         self,
-        builder: Optional[SingleModelAcquisitionBuilder] = None,
+        builder: Optional[AcquisitionFunctionBuilder] = None,
         beta: float = 0.7,
         kappa: float = 1e-4,
     ):

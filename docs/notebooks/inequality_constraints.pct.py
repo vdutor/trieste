@@ -115,7 +115,7 @@ models = {
 # Gardner, 2014 [1], where they use the probability of feasibility wrt the constraint model.
 
 # %%
-class ExpectedFeasibleImprovement(trieste.acquisition.rule.AcquisitionFunctionBuilder):
+class ExpectedFeasibleImprovement(trieste.acquisition.rule.SerialAcquisitionFunctionBuilder):
     MIN_PROBABILITY = 0.5
     PENALIZATION = 1.1
 
@@ -139,7 +139,7 @@ class ExpectedFeasibleImprovement(trieste.acquisition.rule.AcquisitionFunctionBu
 
 pof = trieste.acquisition.ProbabilityOfFeasibility(threshold=sim.threshold)
 eci = ExpectedFeasibleImprovement(pof.using(CONSTRAINT))
-rule = trieste.acquisition.rule.Basic(eci)
+rule = trieste.acquisition.rule.SerialBasic(eci)
 
 # %% [markdown]
 # ## Run the optimization loop
@@ -148,7 +148,7 @@ rule = trieste.acquisition.rule.Basic(eci)
 
 # %%
 num_steps = 20
-bo = trieste.bayesian_optimizer.BayesianOptimizer(observer, search_space)
+bo = trieste.bayesian_optimizer.SerialBayesianOptimizer(observer, search_space)
 
 result, _ = bo.optimize(num_steps, initial_data, models, acquisition_rule=rule)
 
